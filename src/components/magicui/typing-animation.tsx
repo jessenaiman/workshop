@@ -1,3 +1,4 @@
+
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -5,7 +6,7 @@ import { motion, MotionProps, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 interface TypingAnimationProps extends MotionProps {
-  children: string;
+  text: string;
   className?: string;
   duration?: number;
   delay?: number;
@@ -14,7 +15,7 @@ interface TypingAnimationProps extends MotionProps {
 }
 
 export function TypingAnimation({
-  children,
+  text,
   className,
   duration = 100,
   delay = 0,
@@ -53,8 +54,9 @@ export function TypingAnimation({
 
   useEffect(() => {
     if (!started) return;
+    if (typeof text !== 'string') return;
 
-    const graphemes = Array.from(children);
+    const graphemes = Array.from(text);
     let i = 0;
     const typingEffect = setInterval(() => {
       if (i < graphemes.length) {
@@ -68,7 +70,7 @@ export function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [children, duration, started]);
+  }, [text, duration, started]);
 
   return (
     <MotionComponent
@@ -83,3 +85,5 @@ export function TypingAnimation({
     </MotionComponent>
   );
 }
+
+    

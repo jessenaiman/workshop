@@ -19,7 +19,7 @@ import { SparklesText } from "@/components/magicui/sparkles-text";
 import { MorphingText } from "@/components/magicui/morphing-text";
 import { SpinningText } from "@/components/magicui/spinning-text";
 import { ComicText } from "@/components/magicui/comic-text";
-import { ScrollBasedVelocity, ScrollVelocityContainer } from "@/components/magicui/scroll-based-velocity";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/magicui/scroll-based-velocity";
 import { useState } from "react";
 
 export default function MagicUIPage() {
@@ -95,12 +95,12 @@ export default function MagicUIPage() {
         description: "Text velocity based on scroll speed.",
         component: (
             <ScrollVelocityContainer>
-                <ScrollBasedVelocity>
+                <ScrollVelocityRow>
                     <span className="text-2xl font-bold">Scroll Me</span>
-                </ScrollBasedVelocity>
+                </ScrollVelocityRow>
             </ScrollVelocityContainer>
         ),
-        codeSnippet: `import { ScrollBasedVelocity, ScrollVelocityContainer } from "@/components/magicui/scroll-based-velocity";\n\n<ScrollVelocityContainer><ScrollBasedVelocity>Scroll Me</ScrollBasedVelocity></ScrollVelocityContainer>`
+        codeSnippet: `import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/magicui/scroll-based-velocity";\n\n<ScrollVelocityContainer><ScrollVelocityRow>Scroll Me</ScrollVelocityRow></ScrollVelocityContainer>`
     },
     {
       name: "Flip Text",

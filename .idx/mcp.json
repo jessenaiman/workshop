@@ -3,6 +3,13 @@
       "@magicuidesign/mcp": {
         "command": "npx",
         "args": ["-y", "@magicuidesign/mcp@latest"]
+      },
+      "shadcn": {
+        "command": "npx",
+        "args": ["-y", "shadcn@canary", "registry:mcp"],
+        "env": {
+          "REGISTRY_URL": "https://animate-ui.com/r/registry.json"
+        }
       }
     }
   }

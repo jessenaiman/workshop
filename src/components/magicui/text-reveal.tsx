@@ -1,6 +1,7 @@
+
 "use client";
 
-import { motion, MotionValue, useScroll, useTransform } from "motion/react";
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import { ComponentPropsWithoutRef, FC, ReactNode, useRef } from "react";
 
 import { cn } from "@/lib/utils";
@@ -28,7 +29,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
           "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-[1rem] py-[5rem]"
         }
       >
-        <span
+        <p
           ref={targetRef}
           className={
             "flex flex-wrap p-5 text-2xl font-bold text-black/20 dark:text-white/20 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl"
@@ -43,7 +44,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
               </Word>
             );
           })}
-        </span>
+        </p>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ type MagicUISampleProps = {
   description: string;
   children: React.ReactNode;
   codeSnippet: string;
+  onReplay: () => void;
 };
 
 export function MagicUISample({
@@ -13,12 +14,13 @@ export function MagicUISample({
   description,
   children,
   codeSnippet,
+  onReplay,
 }: MagicUISampleProps) {
 
   // MagicUI components often have their own internal triggers (e.g., on-view, on-hover),
-  // so the play button can be a no-op or used for re-triggering if the component supports it.
+  // so the play button can be used for re-triggering if the component supports it.
   const handlePlay = () => {
-     // For now, we'll let the components handle their own animation triggers.
+    onReplay();
   };
 
   return (

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -24,22 +25,26 @@ export default function TabSwitcher({
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex justify-center mb-8 overflow-hidden w-full max-w-6xl">
-        <div className="inline-flex p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
-          {options.map((option) => (
-            <button
-              key={option.id}
-              className={cn(
-                "px-4 py-2 mx-1 rounded-md transition-colors duration-200 text-sm font-medium",
-                activeTab === option.id
-                  ? `text-white ${option.color}`
-                  : "bg-transparent text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-              )}
-              onClick={() => setActiveTab(option.id)}
-            >
-              {option.label}
-            </button>
-          ))}
+      <div className="flex justify-center mb-8">
+        <div className="flex space-x-1 rounded-xl bg-muted p-1">
+          {options.map((option) => {
+            const isActive = activeTab === option.id;
+            return (
+              <button
+                key={option.id}
+                onClick={() => setActiveTab(option.id)}
+                className={cn(
+                  "w-full rounded-lg py-2.5 px-4 text-sm font-medium leading-5",
+                  "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-background ring-primary",
+                  isActive
+                    ? "bg-background text-foreground shadow"
+                    : "text-muted-foreground hover:bg-background/60"
+                )}
+              >
+                {option.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

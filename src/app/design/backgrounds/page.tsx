@@ -22,16 +22,16 @@ import { StarsBackground } from "@/components/animate-ui/backgrounds/stars";
 import { BackgroundCard } from "@/components/design/background-card";
 
 export default function BackgroundsPage() {
-  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 15 });
+  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 30 });
   const [meteorsProps, setMeteorsProps] = useState({ number: 20 });
   const [retroGridProps, setRetroGridProps] = useState({ cellSize: 60 });
   const [replayKey, setReplayKey] = useState(0);
   const { setBackgroundComponent } = useBackground();
 
   const tabOptions = [
-    { id: "magicui", label: "MagicUI", color: "bg-purple-500" },
-    { id: "tailwind", label: "Tailwind CSS", color: "bg-teal-500" },
-    { id: "animateui", label: "Animate UI", color: "bg-blue-500" },
+    { id: "magicui", label: "MagicUI", color: "bg-primary" },
+    { id: "tailwind", label: "Tailwind CSS", color: "bg-primary" },
+    { id: "animateui", label: "Animate UI", color: "bg-primary" },
   ];
 
   const magicUiComponents = [
@@ -108,12 +108,13 @@ export default function BackgroundsPage() {
     { name: "Repeating Linear", className: "bg-[repeating-linear-gradient(45deg,theme(colors.muted/80)_0,theme(colors.muted/80)_10px,transparent_10px,transparent_20px)]", description: "Repeating pattern for texture.", code: 'className="bg-[repeating-linear-gradient(45deg,...)]"' }
   ];
 
-
   const renderContent = (activeTab: string) => {
+    const gridClass = "grid grid-cols-1 md:grid-cols-2 gap-8";
+    
     switch (activeTab) {
       case "tailwind":
         return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className={gridClass}>
             {tailwindBackgrounds.map((bg) => (
               <BackgroundCard
                 key={bg.name}
@@ -131,7 +132,7 @@ export default function BackgroundsPage() {
         );
       case "magicui":
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className={gridClass}>
             {magicUiComponents.map((item) => (
               <BackgroundCard
                 key={item.name}
@@ -152,7 +153,7 @@ export default function BackgroundsPage() {
         );
       case "animateui":
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className={gridClass}>
             {animateUiBackgrounds.map(bg => (
               <BackgroundCard
                 key={bg.name}

@@ -37,56 +37,34 @@ import {
       ],
     },
     {
-      title: "Design Showcase",
+      title: "Design",
+      path: "/design",
+      icon: <Layout className="w-4 h-4" />,
       items: [
+        { title: "Animations", path: "/design/animation", icon: <PlayCircle /> },
+        { title: "Backgrounds", path: "/design/backgrounds", icon: <Layers /> },
+        { title: "Effects", path: "/design/effects", icon: <Sparkles /> },
+        { title: "Three.js", path: "/design/three", icon: <Box /> },
+        { title: "Devices", path: "/design/devices", icon: <Smartphone /> },
+        { title: "Interactive", path: "/design/interactive", icon: <MousePointer /> },
+        { title: "Text", path: "/design/text", icon: <Type /> },
+        { title: "Utilities", path: "/design/utilities", icon: <Code /> },
         {
           title: "MagicUI",
           path: "/design/magicui",
           icon: <Palette />,
-          items: [
-            { title: "Backgrounds", path: "/design/magicui/backgrounds" },
-            { title: "Devices", path: "/design/magicui/devices" },
-            { title: "Interactive", path: "/design/magicui/interactive" },
-            { title: "Text", path: "/design/magicui/text" },
-            { title: "Utilities", path: "/design/magicui/utilities" },
-          ]
         },
-        {
-            title: "Three.js",
-            path: "/design/three",
-            icon: <Component />,
-        },
-        {
-            title: "Animations",
-            path: "/design/animation",
-            icon: <PlayCircle />,
-            items: [
-              { title: "Animate.css", path: "/design/animation/animatecss" },
-              { title: "Tailwind CSS", path: "/design/animation/tailwind" },
-              { title: "MagicUI", path: "/design/animation/magicui" }
-            ]
-        },
-        {
-            title: "Effects",
-            path: "/design/effects",
-            icon: <Sparkles />,
-        },
-      ],
+      ]
     },
     {
         title: "AI Demos",
         items: [
-          {
-            title: "AI Demos",
-            path: "/ai/overview",
-            icon: <Atom />,
-            items: [
-              { title: "Component Customizer", path: "/ai/customizer" },
-              { title: "Blockchain AI", path: "/ai/blockchain-ai" },
-              { title: "Flowise Chat", path: "/ai/flowise-chat" },
-              { title: "Pollinate AI", path: "/ai/pollinate-ai" },
-            ]
-          }
+          // Flatten to avoid collapsible: expose children as direct items under the section
+          { title: "AI Overview", path: "/ai/overview", icon: <Atom /> },
+          { title: "Component Customizer", path: "/ai/customizer", icon: <Sparkles /> },
+          { title: "Blockchain AI", path: "/ai/blockchain-ai", icon: <GitBranch /> },
+          { title: "Flowise Chat", path: "/ai/flowise-chat", icon: <MessageSquare /> },
+          { title: "Pollinate AI", path: "/ai/pollinate-ai", icon: <Bot /> },
         ]
     },
     {
@@ -120,4 +98,5 @@ import {
       ]
   }
   ];
+  
   

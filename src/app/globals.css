@@ -1,0 +1,279 @@
+@import 'animate.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme - Warm & Sophisticated */
+    --background: 42 30% 97%;  /* Warm off-white */
+    --foreground: 240 10% 10%;  /* Deep navy for text */
+    --card: 0 0% 99%;         /* Slightly off-white cards */
+    --card-foreground: 240 10% 10%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 240 10% 10%;
+    --primary: 205 80% 45%;    /* Deep teal blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 32 50% 90%;   /* Warm beige */
+    --secondary-foreground: 240 10% 10%;
+    --muted: 32 20% 92%;      /* Very light warm gray */
+    --muted-foreground: 240 3.8% 35%;
+    --accent: 180 30% 90%;    /* Soft teal accent */
+    --accent-foreground: 205 80% 35%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 32 20% 85%;     /* Warm gray border */
+    --input: 32 20% 85%;
+    --ring: 205 80% 45%;      /* Matching primary */
+    --radius: 0.6rem;         /* Slightly more rounded corners */
+
+    /* Enhanced Colors */
+    --success: 160 84% 39%;   /* Teal green */
+    --warning: 35 91% 62%;    /* Warm amber */
+    --info: 198 93% 60%;      /* Sky blue */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      to right,
+      hsl(205 80% 45%),
+      hsl(190 90% 45%)
+    );
+
+    /* Subtle shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.04), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.08);
+  }
+
+  .dark {
+    /* Dark Theme - Deep Ocean */
+    --background: 210 22% 8%;    /* Deep navy */
+    --foreground: 210 20% 98%;   /* Off-white */
+    --card: 210 20% 10%;        /* Slightly lighter navy */
+    --card-foreground: 210 20% 98%;
+    --popover: 210 20% 10%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 190 90% 50%;     /* Bright teal */
+    --primary-foreground: 210 20% 10%;
+    --secondary: 210 20% 15%;   /* Darker navy */
+    --secondary-foreground: 210 20% 98%;
+    --muted: 210 20% 18%;
+    --muted-foreground: 210 5% 64.9%;
+    --accent: 200 60% 15%;      /* Deep teal */
+    --accent-foreground: 190 90% 50%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 25%;
+    --input: 210 20% 25%;
+    --ring: 190 90% 50%;
+
+    /* Dark Theme Accents */
+    --success: 160 84% 39%;
+    --warning: 35 91% 62%;
+    --info: 198 93% 60%;
+
+    /* Dark Gradients */
+    --gradient-primary: linear-gradient(
+      to right,
+      hsl(190 90% 50%),
+      hsl(180 100% 50%)
+    );
+
+    /* Dark Theme Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+  }
+  .theme {
+    --animate-shine: shine var(--duration) infinite linear;
+    --animate-background-position-spin: background-position-spin 3000ms infinite alternate;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-screen transition-colors duration-200;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography Enhancements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-balance;
+    line-height: 1.2;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+
+  p {
+    @apply leading-relaxed text-pretty text-muted-foreground;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary font-medium transition-colors hover:text-primary/90;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:opacity-90;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/30 transition-colors;
+  }
+
+  /* Selection Styling */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+
+  /* Focus States */
+  *:focus-visible {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background outline-none;
+  }
+
+  /* Custom Utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Fullscreen Button */
+  .fullscreen-btn {
+    @apply fixed top-4 right-4 z-50 p-2 rounded-full bg-background/80 backdrop-blur-sm border shadow-md hover:bg-accent transition-colors;
+  }
+
+  /* Theme Transition */
+  .theme-transition * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+  }
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom Scrollbar for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)/0.2) transparent;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
+  }
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
+  }
+  @keyframes background-position-spin {
+  0% {
+    background-position: top center;
+    }
+  100% {
+    background-position: bottom center;
+    }
+  }
+  @keyframes background-position-spin {
+  0% {
+    background-position: top center;
+    }
+  100% {
+    background-position: bottom center;
+    }
+  }
+}

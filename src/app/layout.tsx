@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import '../styles/globals.css';
+import '../app/globals.css';
 import { Header } from '@/app/components/header';
 import { Toaster } from "@/components/ui/toaster"
 import Script from 'next/script';
@@ -27,16 +27,16 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
       </head>
-      <body className="font-body antialiased min-h-screen flex flex-col">
+      <body className="font-body antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 light">
         <ThemeProviderWrapper>
           <SidebarProvider>
-            <Sidebar>
+            <Sidebar className="border-r border-sidebar-border transition-colors duration-300 bg-sidebar-background">
               <AppSidebar />
             </Sidebar>
-            <SidebarInset>
+            <SidebarInset className="bg-background transition-colors duration-300">
               <div className="flex flex-col min-h-screen">
                 <Header />
-                <main className="flex-1">
+                <main className="flex-1 bg-background text-foreground transition-colors duration-300">
                   {children}
                 </main>
                 <Footer />

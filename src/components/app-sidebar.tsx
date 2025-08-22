@@ -70,7 +70,7 @@ export function AppSidebar() {
                         <SidebarMenuSub>
                           {item.items.map((subItem) => (
                             <li key={subItem.path}>
-                              <Link href={subItem.path} legacyBehavior passHref>
+                              <Link href={subItem.path}>
                                 <SidebarMenuSubButton isActive={pathname === subItem.path}>
                                   {subItem.title}
                                 </SidebarMenuSubButton>
@@ -82,7 +82,7 @@ export function AppSidebar() {
                     </Collapsible>
                   ) : (
                     <SidebarMenuItem key={item.path}>
-                      <Link href={item.path} legacyBehavior passHref>
+                      <Link href={item.path}>
                         <SidebarMenuButton
                           isActive={pathname === item.path}
                           tooltip={{

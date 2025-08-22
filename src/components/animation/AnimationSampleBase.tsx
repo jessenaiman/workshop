@@ -8,10 +8,7 @@ import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from "@/components/animate-ui/radix/dialog";
 import { CodeEditor } from "@/components/animate-ui/components/code-editor";
 import { Button } from "@/components/ui/button";

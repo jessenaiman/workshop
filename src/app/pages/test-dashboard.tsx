@@ -1,6 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Layout from '../layouts/Layout.astro';
 import { navigationItems } from '../data/navigation';
 
 // This would be populated from your test results in a real implementation

@@ -1,6 +1,4 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getEntry, render } from 'astro:content';
 
 // Get the TailwindCSS markdown content
 const tailwindContent = await getEntry('info', 'tailwind-styleguide');

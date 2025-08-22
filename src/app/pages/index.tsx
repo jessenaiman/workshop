@@ -1,9 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import { navigationItems } from "../data/navigation";
 import { cred } from "../data/site";
-import { Icon } from "astro-icon/components";
-import SimpleHero from "../components/Svelte/SimpleHero.svelte";
 
 // Extract sections from navigation data
 const findSection = (name: string) => navigationItems.find((n) => n.name === name);

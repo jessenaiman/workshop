@@ -19,8 +19,8 @@ export default function MagicUIPage() {
     {
       name: "Text Reveal",
       description: "Reveals text with a sliding animation.",
-      component: <div className="z-10 flex min-h-[4rem] items-center justify-center rounded-lg border bg-background p-2"><TextReveal text="Magic UI" /></div>,
-      codeSnippet: `import { TextReveal } from "@/components/magicui/text-reveal";\n\n<TextReveal text="Hello World" />`
+      component: <div className="z-10 flex min-h-[4rem] items-center justify-center rounded-lg border bg-background p-2"><TextReveal>Magic UI</TextReveal></div>,
+      codeSnippet: `import { TextReveal } from "@/components/magicui/text-reveal";\n\n<TextReveal>Hello World</TextReveal>`
     },
     {
       name: "Animated List",

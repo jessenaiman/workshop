@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -57,9 +58,8 @@ export function AnimateCssSample({
       language="html"
       onPlay={handlePlay}
       codeTitle={`Animate.css - ${animation}`}
-      className="h-48"
     >
-      <div className="w-24 h-24 flex items-center justify-center">
+      <div className="w-full h-32 flex items-center justify-center">
         <div
             className={cn(
             "w-16 h-16 rounded-lg bg-gradient-to-r",

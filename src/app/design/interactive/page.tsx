@@ -7,14 +7,15 @@ import { MagicCard } from '@/components/magicui/magic-card';
 import { CoolMode } from '@/components/magicui/cool-mode';
 import { MousePointer, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { CodeModal } from '@/components/ui/CodeModal';
 
 export default function InteractivePage() {
     return (
         <div className="container mx-auto py-12">
             <div className="mb-8">
                 <Button variant="ghost" asChild className="mb-6">
-                    <Link href="/design/magicui" className="flex items-center gap-2">
-                    <ArrowLeft className="h-4 w-4" /> Back to Components
+                    <Link href="/design" className="flex items-center gap-2">
+                    <ArrowLeft className="h-4 w-4" /> Back to Design
                     </Link>
                 </Button>
                 
@@ -30,46 +31,61 @@ export default function InteractivePage() {
             </div>
 
             <div className="grid gap-8">
-            {/* Pulsating Button */}
             <Card>
-                <CardHeader>
-                <CardTitle>Pulsating Button</CardTitle>
-                <CardDescription>Button with a gentle pulsing animation</CardDescription>
+                <CardHeader className="flex flex-row justify-between items-start">
+                    <div>
+                        <CardTitle>Pulsating Button</CardTitle>
+                        <CardDescription>Button with a gentle pulsing animation</CardDescription>
+                    </div>
+                    <CodeModal
+                        title="Pulsating Button"
+                        code={`<PulsatingButton>Click Me</PulsatingButton>`}
+                        language="tsx"
+                        iconOnly
+                    />
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6">
-                <div className="flex justify-center p-8">
+                <CardContent className="flex justify-center p-8">
                     <PulsatingButton>Click Me</PulsatingButton>
-                </div>
                 </CardContent>
             </Card>
 
-            {/* Magic Card */}
             <Card>
-                <CardHeader>
-                <CardTitle>Magic Card</CardTitle>
-                <CardDescription>Card with magical hover effects</CardDescription>
+                <CardHeader className="flex flex-row justify-between items-start">
+                    <div>
+                        <CardTitle>Magic Card</CardTitle>
+                        <CardDescription>Card with magical hover effects</CardDescription>
+                    </div>
+                    <CodeModal
+                        title="Magic Card"
+                        code={`<MagicCard>...</MagicCard>`}
+                        language="tsx"
+                        iconOnly
+                    />
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6">
-                <div className="flex justify-center p-8">
+                <CardContent className="flex justify-center p-8">
                     <MagicCard className="w-64 h-48 flex items-center justify-center">
-                    <p className="text-center p-4">Hover over me</p>
+                        <p className="text-center p-4">Hover over me</p>
                     </MagicCard>
-                </div>
                 </CardContent>
             </Card>
 
-            {/* Cool Mode */}
             <Card>
-                <CardHeader>
-                <CardTitle>Cool Mode</CardTitle>
-                <CardDescription>Interactive cool mode effect</CardDescription>
+                <CardHeader className="flex flex-row justify-between items-start">
+                    <div>
+                        <CardTitle>Cool Mode</CardTitle>
+                        <CardDescription>Interactive cool mode effect</CardDescription>
+                    </div>
+                    <CodeModal
+                        title="Cool Mode"
+                        code={`<CoolMode><Button>Click and drag me</Button></CoolMode>`}
+                        language="tsx"
+                        iconOnly
+                    />
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6">
-                <div className="flex justify-center p-8">
+                <CardContent className="flex justify-center p-8">
                     <CoolMode>
                         <Button>Click and drag me</Button>
                     </CoolMode>
-                </div>
                 </CardContent>
             </Card>
             </div>

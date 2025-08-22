@@ -49,17 +49,11 @@ import {
         { title: "Interactive", path: "/design/interactive", icon: <MousePointer /> },
         { title: "Text", path: "/design/text", icon: <Type /> },
         { title: "Utilities", path: "/design/utilities", icon: <Code /> },
-        {
-          title: "MagicUI",
-          path: "/design/magicui",
-          icon: <Palette />,
-        },
       ]
     },
     {
         title: "AI Demos",
         items: [
-          // Flatten to avoid collapsible: expose children as direct items under the section
           { title: "AI Overview", path: "/ai/overview", icon: <Atom /> },
           { title: "Component Customizer", path: "/ai/customizer", icon: <Sparkles /> },
           { title: "Blockchain AI", path: "/ai/blockchain-ai", icon: <GitBranch /> },
@@ -98,5 +92,3 @@ import {
       ]
   }
   ];
-  
-  

@@ -16,7 +16,8 @@ import {
     PlayCircle,
     Server,
     MessageSquare,
-    FileCode
+    FileCode,
+    Layers
   } from "lucide-react";
   
   export const navigationItems = [
@@ -96,6 +97,11 @@ import {
             path: "/styleguides/tailwind",
             icon: <Wind />,
         },
+        {
+            title: "Radix UI",
+            path: "/styleguides/radixui",
+            icon: <Layers />,
+        }
       ]
     },
     {

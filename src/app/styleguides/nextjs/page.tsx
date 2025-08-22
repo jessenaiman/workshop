@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/app/components/code-block";
 import { TextAnimate } from "@/components/magicui/text-animate";
 import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
 import { BorderBeam } from "@/components/magicui/border-beam";

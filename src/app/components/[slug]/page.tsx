@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { components } from '@/lib/components-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CodeBlock } from '@/components/code-block';
+import { CodeBlock } from '@/app/components/code-block';
 import ComponentCustomizer from './component-customizer';
 import { Code, Palette } from 'lucide-react';
 

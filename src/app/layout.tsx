@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import { Header } from '@/components/header';
+import '../styles/globals.css';
+import { Header } from '@/app/components/header';
 import { Toaster } from "@/components/ui/toaster"
 import Script from 'next/script';
 import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/app-sidebar';
-import { Footer } from '@/components/footer';
+import { AppSidebar } from '@/app/components/app-sidebar';
+import { Footer } from '@/app/components/footer';
+import { ThemeProviderWrapper } from "@/lib/theme-provider"
 
 export const metadata: Metadata = {
   title: 'MagicBox',
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -27,21 +28,23 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
       </head>
       <body className="font-body antialiased min-h-screen flex flex-col">
-        <SidebarProvider>
-          <Sidebar>
-            <AppSidebar />
-          </Sidebar>
-          <SidebarInset>
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
-          </SidebarInset>
-        </SidebarProvider>
+        <ThemeProviderWrapper>
+          <SidebarProvider>
+            <Sidebar>
+              <AppSidebar />
+            </Sidebar>
+            <SidebarInset>
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <Toaster />
+            </SidebarInset>
+          </SidebarProvider>
+        </ThemeProviderWrapper>
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" strategy="beforeInteractive" />
         <Script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19" strategy="beforeInteractive" />
       </body>

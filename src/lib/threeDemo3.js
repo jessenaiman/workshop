@@ -14,28 +14,34 @@ export function initDemo3() {
     originalPositions.set(positions);
     const particlesGeometry = new THREE.BufferGeometry();
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMaterial = new THREE.PointsMaterial({ size: 2, color: 0x87ceeb });
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 2,
+        sizeAttenuation: true,
+        color: 0xFFFFFF,
+        transparent: true,
+        opacity: 0.8
+    });
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
 
-    const gui = new lil.GUI({ container: document.getElementById('scene3-container') });
-    const params = {
-        speed: 0.1,
-        pattern: 'Galaxy',
-        particleSize: particlesMaterial.size,
-        particleColor: particlesMaterial.color.getHex(),
+    // Use global controls if available, otherwise use default params
+    const globalControls = window.threeDemoControls && window.threeDemoControls.demo3 ? window.threeDemoControls.demo3 : {
+        pattern: 'Static',
+        speed: 1.0
     };
-    gui.add(params, 'speed', 0.05, 0.5).name('Animation Speed');
-    gui.add(params, 'pattern', ['Galaxy', 'Wave', 'Static']).name('Pattern');
-    gui.add(params, 'particleSize', 0.5, 10).name('Particle Size').onChange(val => particlesMaterial.size = val);
-    gui.addColor(params, 'particleColor').name('Particle Color').onChange(val => particlesMaterial.color.set(val));
 
     const clock = new THREE.Clock();
 
     function animate() {
         resizeRendererToDisplaySize();
-        const elapsedTime = clock.getElapsedTime() * params.speed;
+        const elapsedTime = clock.getElapsedTime() * (globalControls.speed || 1.0);
         const positions = particles.geometry.attributes.position.array;
+
+        // Check for updated controls
+        if (window.threeDemoControls && window.threeDemoControls.demo3) {
+            globalControls.pattern = window.threeDemoControls.demo3.pattern;
+            globalControls.speed = window.threeDemoControls.demo3.speed;
+        }
 
         for (let i = 0; i < count; i++) {
             const i3 = i * 3;
@@ -43,7 +49,7 @@ export function initDemo3() {
             const y = originalPositions[i3 + 1];
             const z = originalPositions[i3 + 2];
             
-            switch(params.pattern) {
+            switch(globalControls.pattern) {
                 case 'Wave':
                     positions[i3 + 1] = y + Math.sin(elapsedTime * 5 + x * 0.01) * 100;
                     break;

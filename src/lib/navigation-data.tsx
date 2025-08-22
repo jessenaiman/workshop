@@ -9,15 +9,14 @@ import {
     Box,
     Bot,
     Sparkles,
-    Droplets,
-    AppWindow,
+    Atom,
+    Info,
     Wind,
     GitBranch,
     PlayCircle,
     Server,
     MessageSquare,
-    Atom,
-    Info
+    FileCode
   } from "lucide-react";
   
   export const navigationItems = [
@@ -43,6 +42,13 @@ import {
           title: "MagicUI",
           path: "/design/magicui",
           icon: <Palette />,
+          items: [
+            { title: "Backgrounds", path: "/design/magicui/backgrounds" },
+            { title: "Devices", path: "/design/magicui/devices" },
+            { title: "Interactive", path: "/design/magicui/interactive" },
+            { title: "Text", path: "/design/magicui/text" },
+            { title: "Utilities", path: "/design/magicui/utilities" },
+          ]
         },
         {
             title: "Three.js",
@@ -64,36 +70,27 @@ import {
     {
         title: "AI Demos",
         items: [
-            {
-                title: "Component Customizer",
-                path: "/ai/customizer",
-                icon: <Bot />,
-            },
-            {
-              title: "AI Overview",
-              path: "/ai/overview",
-              icon: <Atom />,
-            },
-            {
-              title: "Blockchain AI",
-              path: "/ai/blockchain-ai",
-              icon: <GitBranch />,
-            },
-            {
-              title: "Flowise Chat",
-              path: "/ai/flowise-chat",
-              icon: <MessageSquare />,
-            },
-            {
-              title: "Pollinate AI",
-              path: "/ai/pollinate-ai",
-              icon: <Sparkles />,
-            },
+          {
+            title: "AI Demos",
+            path: "/ai/overview",
+            icon: <Atom />,
+            items: [
+              { title: "Component Customizer", path: "/ai/customizer" },
+              { title: "Blockchain AI", path: "/ai/blockchain-ai" },
+              { title: "Flowise Chat", path: "/ai/flowise-chat" },
+              { title: "Pollinate AI", path: "/ai/pollinate-ai" },
+            ]
+          }
         ]
     },
     {
       title: "Style Guides",
       items: [
+        {
+            title: "Next.js",
+            path: "/styleguides/nextjs",
+            icon: <FileCode />,
+        },
         {
             title: "Tailwind CSS",
             path: "/styleguides/tailwind",

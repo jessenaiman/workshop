@@ -10,6 +10,7 @@ import { RetroGrid } from '@/components/magicui/retro-grid';
 import { ShineBorder } from '@/components/magicui/shine-border';
 import { Layout, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export default function BackgroundsPage() {
     return (
@@ -77,7 +78,9 @@ export default function BackgroundsPage() {
                 </CardHeader>
                 <CardContent className="flex flex-col gap-6">
                 <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
-                    <DotPattern className="absolute inset-0 w-full h-full [--dot-bg:theme(colors.background)] [--dot-color:theme(colors.muted-foreground)]" />
+                    <DotPattern className={cn(
+                        "[--dot-bg:theme(colors.background)] [--dot-color:theme(colors.muted-foreground)]"
+                    )} />
                     <div className="relative z-10 flex items-center justify-center">
                     <p className="text-center font-medium">Dot pattern background</p>
                     </div>

@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import '../app/globals.css';
 import { Header } from '@/app/components/header';
@@ -37,9 +38,9 @@ export default function RootLayout({
               </Sidebar>
               <SidebarInset className="bg-background transition-colors duration-300">
                 <div className="relative flex flex-col min-h-screen">
-                  <BackgroundRenderer />
                   <Header />
                   <main className="flex-1 bg-transparent text-foreground transition-colors duration-300 z-10">
+                    <BackgroundRenderer />
                     {children}
                   </main>
                   <Footer />
@@ -55,3 +56,4 @@ export default function RootLayout({
     </html>
   );
 }
+

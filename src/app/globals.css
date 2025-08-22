@@ -253,32 +253,32 @@ body {
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-name: none;
-  mix-blend-mode: normal;
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-}
-
-@keyframes fade-out {
-  to { opacity: 0; }
-}
-
-@keyframes slide-from-right {
-  from { transform: translateX(30px); }
-}
-
-@keyframes slide-to-left {
-  to { transform: translateX(-30px); }
-}
-
 ::view-transition-old(root) {
-  animation: 300ms ease-in-out both fade-out, 300ms ease-in-out both slide-to-left;
+  animation: 300ms ease-out both fade-out-slide-left;
 }
 
 ::view-transition-new(root) {
-  animation: 300ms ease-in-out both fade-in, 300ms ease-in-out both slide-from-right;
+  animation: 300ms ease-in both fade-in-slide-right;
+}
+
+@keyframes fade-out-slide-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes fade-in-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Toaster } from "@/components/ui/toaster"
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'MagicBox',
@@ -27,6 +28,8 @@ export default function RootLayout({
           {children}
         </main>
         <Toaster />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" strategy="beforeInteractive" />
+        <Script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19" strategy="beforeInteractive" />
       </body>
     </html>
   );

@@ -90,7 +90,7 @@ export default function BackgroundsPage() {
                     <CardContent>
                         <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
                         <DotPattern className={cn(
-                            "[--dot-bg:theme(colors.background)] [--dot-color:theme(colors.muted-foreground)]"
+                            "[--dot-bg:theme(colors.background)] [--dot-color:hsl(var(--muted-foreground))]"
                         )} />
                         <div className="relative z-10 flex items-center justify-center">
                             <p className="text-center font-medium">Dot pattern background</p>

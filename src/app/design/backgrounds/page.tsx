@@ -39,8 +39,8 @@ function InteractiveMagicCard({ children }: { children: React.ReactNode }) {
 
 
 export default function BackgroundsPage() {
-  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 3 });
-  const [meteorsProps, setMeteorsProps] = useState({ number: 20 });
+  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 5 });
+  const [meteorsProps, setMeteorsProps] = useState({ number: 20, minDuration: 4, maxDuration: 12 });
   const [retroGridProps, setRetroGridProps] = useState({ cellSize: 60 });
   const [replayKey, setReplayKey] = useState(0);
 
@@ -57,7 +57,7 @@ export default function BackgroundsPage() {
             {tailwindBackgrounds.map((bg, index) => (
               <Card 
                 key={bg.name} 
-                className="p-6 text-center h-48 relative overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-105"
+                className="p-6 text-center h-48 relative overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-105 bg-muted/30"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div
@@ -73,7 +73,7 @@ export default function BackgroundsPage() {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <InteractiveMagicCard>
-                <Card>
+                <Card className="bg-muted/30">
                     <CardHeader>
                         <div className="flex justify-between items-start">
                             <div>
@@ -85,12 +85,12 @@ export default function BackgroundsPage() {
                                     <PopoverTrigger asChild><Button variant="ghost" size="icon"><Settings className="h-4 w-4"/></Button></PopoverTrigger>
                                     <PopoverContent className="w-64 space-y-4">
                                         <div className="space-y-2">
-                                            <Label>Max Opacity: {animatedGridProps.maxOpacity}</Label>
+                                            <Label>Max Opacity: {animatedGridProps.maxOpacity.toFixed(1)}</Label>
                                             <Slider value={[animatedGridProps.maxOpacity]} onValueChange={(v) => setAnimatedGridProps({...animatedGridProps, maxOpacity: v[0]})} min={0.1} max={1} step={0.1} />
                                         </div>
                                         <div className="space-y-2">
                                             <Label>Duration: {animatedGridProps.duration}s</Label>
-                                            <Slider value={[animatedGridProps.duration]} onValueChange={(v) => setAnimatedGridProps({...animatedGridProps, duration: v[0]})} min={1} max={10} step={0.5} />
+                                            <Slider value={[animatedGridProps.duration]} onValueChange={(v) => setAnimatedGridProps({...animatedGridProps, duration: v[0]})} min={1} max={20} step={1} />
                                         </div>
                                     </PopoverContent>
                                 </Popover>
@@ -118,7 +118,7 @@ export default function BackgroundsPage() {
             </InteractiveMagicCard>
 
             <InteractiveMagicCard>
-                <Card>
+                <Card className="bg-muted/30">
                     <CardHeader>
                         <div className="flex justify-between items-start">
                             <div>
@@ -147,7 +147,7 @@ export default function BackgroundsPage() {
             </InteractiveMagicCard>
 
             <InteractiveMagicCard>
-                <Card>
+                <Card className="bg-muted/30">
                     <CardHeader>
                          <div className="flex justify-between items-start">
                             <div>
@@ -160,7 +160,7 @@ export default function BackgroundsPage() {
                                     <PopoverContent className="w-64 space-y-4">
                                         <div className="space-y-2">
                                             <Label>Number of Meteors: {meteorsProps.number}</Label>
-                                            <Slider value={[meteorsProps.number]} onValueChange={(v) => setMeteorsProps({number: v[0]})} min={5} max={50} step={1} />
+                                            <Slider value={[meteorsProps.number]} onValueChange={(v) => setMeteorsProps({...meteorsProps, number: v[0]})} min={5} max={50} step={1} />
                                         </div>
                                     </PopoverContent>
                                 </Popover>
@@ -184,7 +184,7 @@ export default function BackgroundsPage() {
             </InteractiveMagicCard>
 
             <InteractiveMagicCard>
-                <Card>
+                <Card className="bg-muted/30">
                     <CardHeader>
                         <div className="flex justify-between items-start">
                                 <div>

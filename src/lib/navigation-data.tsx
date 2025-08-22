@@ -60,6 +60,11 @@ import {
             title: "Animations",
             path: "/design/animation",
             icon: <PlayCircle />,
+            items: [
+              { title: "Animate.css", path: "/design/animation/animatecss" },
+              { title: "Tailwind CSS", path: "/design/animation/tailwind" },
+              { title: "MagicUI", path: "/design/animation/magicui" }
+            ]
         },
         {
             title: "Effects",

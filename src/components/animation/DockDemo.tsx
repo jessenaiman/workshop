@@ -1,18 +1,15 @@
-"use client";
 
 import { HomeIcon, SettingsIcon, MailIcon } from "lucide-react";
 import { AnimationSampleBase } from "@/components/animation/AnimationSampleBase";
 import { Dock, DockIcon } from "@/components/magicui/dock";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 
 const codeSnippet = `import { Dock, DockIcon } from "@/components/magicui/dock";
 import { HomeIcon, SettingsIcon, MailIcon } from "lucide-react";
 
 export function DockDemo() {
   return (
-    <div className="flex justify-center w-full">
-      <Dock direction="middle">
+    <div className="flex justify-center items-center h-full w-full">
+      <Dock>
         <DockIcon>
           <HomeIcon className="size-4" />
         </DockIcon>
@@ -28,23 +25,21 @@ export function DockDemo() {
 }`;
 
 export function DockDemo() {
-  // The dock component doesn't have a triggerable animation, so we'll use an empty function
   const handlePlay = () => {
-    // No action needed for dock component
-    console.log("Dock component doesn't have a triggerable animation");
+    // Dock is interactive on hover, no programmatic trigger needed.
   };
 
   return (
     <AnimationSampleBase
       title="MacOS Dock"
-      description="An implementation of the MacOS dock using react + tailwindcss + framer motion"
+      description="A macOS-style dock with hover magnification."
       code={codeSnippet}
       language="tsx"
       onPlay={handlePlay}
       codeTitle="MagicUI - Dock"
     >
-      <div className="flex justify-center w-full pt-8">
-        <Dock direction="middle">
+      <div className="flex justify-center items-center w-full h-full pt-4">
+        <Dock>
           <DockIcon>
             <HomeIcon className="size-4" />
           </DockIcon>

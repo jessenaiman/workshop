@@ -6,6 +6,9 @@ import { PlayCircle } from "lucide-react";
 import { ANIMATIONS, COLOR_THEMES } from "@/data/animation";
 import { AnimateCssSample } from "@/components/animation/AnimateCssSample";
 import "animate.css";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function AnimateCssPage() {
   const [triggerAll, setTriggerAll] = useState(false);
@@ -17,7 +20,7 @@ export default function AnimateCssPage() {
 
   const handleTriggerAll = () => {
     setTriggerAll(true);
-    setTimeout(() => setTriggerAll(false), 5000);
+    setTimeout(() => setTriggerAll(false), 5000); // Reset after 5s
   };
 
   return (
@@ -29,49 +32,56 @@ export default function AnimateCssPage() {
         </Button>
       </div>
       
-      <div className="bg-muted p-4 rounded-lg mb-6">
-        <h3 className="text-lg font-semibold mb-2">Settings</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Duration</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.duration}
-              onChange={(e) => setSettings({ ...settings, duration: e.target.value })}
-            >
-              <option value="animate__duration-0.5s">0.5s</option>
-              <option value="animate__duration-1s">1s</option>
-              <option value="animate__duration-2s">2s</option>
-              <option value="animate__duration-3s">3s</option>
-            </select>
+      <Card className="bg-muted/50">
+        <CardHeader>
+          <CardTitle>Animation Settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="duration">Duration</Label>
+              <Select value={settings.duration} onValueChange={(value) => setSettings({ ...settings, duration: value })}>
+                <SelectTrigger id="duration">
+                  <SelectValue placeholder="Select duration" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="animate__duration-0.5s">0.5s</SelectItem>
+                  <SelectItem value="animate__duration-1s">1s</SelectItem>
+                  <SelectItem value="animate__duration-2s">2s</SelectItem>
+                  <SelectItem value="animate__duration-3s">3s</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="delay">Delay</Label>
+               <Select value={settings.delay} onValueChange={(value) => setSettings({ ...settings, delay: value })}>
+                <SelectTrigger id="delay">
+                  <SelectValue placeholder="Select delay" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="animate__delay-0s">0s</SelectItem>
+                  <SelectItem value="animate__delay-1s">1s</SelectItem>
+                  <SelectItem value="animate__delay-2s">2s</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="iteration">Iteration</Label>
+               <Select value={settings.iteration} onValueChange={(value) => setSettings({ ...settings, iteration: value })}>
+                <SelectTrigger id="iteration">
+                  <SelectValue placeholder="Select iteration" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="animate__repeat-1">1</SelectItem>
+                  <SelectItem value="animate__repeat-2">2</SelectItem>
+                  <SelectItem value="animate__repeat-3">3</SelectItem>
+                  <SelectItem value="animate__repeat-infinite">Infinite</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Delay</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.delay}
-              onChange={(e) => setSettings({ ...settings, delay: e.target.value })}
-            >
-              <option value="animate__delay-0s">0s</option>
-              <option value="animate__delay-1s">1s</option>
-              <option value="animate__delay-2s">2s</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Iteration</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.iteration}
-              onChange={(e) => setSettings({ ...settings, iteration: e.target.value })}
-            >
-              <option value="animate__repeat-1">1</option>
-              <option value="animate__repeat-2">2</option>
-              <option value="animate__repeat-3">3</option>
-              <option value="animate__repeat-infinite">Infinite</option>
-            </select>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {Object.entries(ANIMATIONS).map(([category, animations]) => (
         <div key={category} className="mb-12">

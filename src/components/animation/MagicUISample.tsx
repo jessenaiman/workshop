@@ -1,28 +1,25 @@
-"use client";
 
-import { useState } from "react";
 import { AnimationSampleBase } from "@/components/animation/AnimationSampleBase";
-import { cn } from "@/lib/utils";
 
 type MagicUISampleProps = {
   name: string;
   description: string;
-  className: string;
+  children: React.ReactNode;
   codeSnippet: string;
-  trigger?: boolean;
 };
 
 export function MagicUISample({
   name,
   description,
-  className,
+  children,
   codeSnippet,
-  trigger: externalTrigger = false
 }: MagicUISampleProps) {
-  const [trigger, setTrigger] = useState(false);
 
-  // Use external trigger or local trigger
-  const isTriggered = externalTrigger || trigger;
+  // MagicUI components often have their own internal triggers (e.g., on-view, on-hover),
+  // so the play button can be a no-op or used for re-triggering if the component supports it.
+  const handlePlay = () => {
+     // For now, we'll let the components handle their own animation triggers.
+  };
 
   return (
     <AnimationSampleBase
@@ -30,16 +27,13 @@ export function MagicUISample({
       description={description}
       code={codeSnippet}
       language="tsx"
-      onPlay={() => setTrigger(true)}
+      onPlay={handlePlay}
       codeTitle={`MagicUI - ${name}`}
+      className="h-auto min-h-[14rem] justify-between"
     >
-      <div
-        className={cn(
-          "w-16 h-16 mb-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500",
-          isTriggered && className
-        )}
-        onAnimationEnd={() => setTrigger(false)}
-      ></div>
+      <div className="flex items-center justify-center p-4 min-h-[8rem] w-full">
+         {children}
+      </div>
     </AnimationSampleBase>
   );
 }

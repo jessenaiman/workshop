@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
 import { TailwindSample } from "@/components/animation/TailwindSample";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function TailwindPage() {
   const [triggerAll, setTriggerAll] = useState(false);
@@ -23,8 +26,6 @@ export default function TailwindPage() {
     { name: "animate-ping", description: "Ping animation" },
     { name: "animate-pulse", description: "Pulse animation" },
     { name: "animate-spin", description: "Spin animation" },
-    { name: "animate-pulse-slow", description: "Slow pulse animation" },
-    { name: "animate-bounce-delayed", description: "Delayed bounce" },
   ];
 
   return (
@@ -36,52 +37,59 @@ export default function TailwindPage() {
         </Button>
       </div>
 
-      <div className="bg-muted p-4 rounded-lg mb-6">
-        <h3 className="text-lg font-semibold mb-2">Settings</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Duration</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.duration}
-              onChange={(e) => setSettings({ ...settings, duration: e.target.value })}
-            >
-              <option value="duration-500">0.5s</option>
-              <option value="duration-700">0.7s</option>
-              <option value="duration-1000">1s</option>
-              <option value="duration-1500">1.5s</option>
-            </select>
+      <Card className="bg-muted/50">
+        <CardHeader>
+          <CardTitle>Animation Settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="duration">Duration</Label>
+              <Select value={settings.duration} onValueChange={(value) => setSettings({ ...settings, duration: value })}>
+                <SelectTrigger id="duration">
+                  <SelectValue placeholder="Select duration" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="duration-500">0.5s</SelectItem>
+                  <SelectItem value="duration-700">0.7s</SelectItem>
+                  <SelectItem value="duration-1000">1s</SelectItem>
+                  <SelectItem value="duration-1500">1.5s</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="delay">Delay</Label>
+               <Select value={settings.delay} onValueChange={(value) => setSettings({ ...settings, delay: value })}>
+                <SelectTrigger id="delay">
+                  <SelectValue placeholder="Select delay" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="delay-0">0s</SelectItem>
+                  <SelectItem value="delay-100">0.1s</SelectItem>
+                  <SelectItem value="delay-300">0.3s</SelectItem>
+                  <SelectItem value="delay-500">0.5s</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="timing">Timing Function</Label>
+               <Select value={settings.timing} onValueChange={(value) => setSettings({ ...settings, timing: value })}>
+                <SelectTrigger id="timing">
+                  <SelectValue placeholder="Select timing" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ease-linear">Linear</SelectItem>
+                  <SelectItem value="ease-in">Ease In</SelectItem>
+                  <SelectItem value="ease-out">Ease Out</SelectItem>
+                  <SelectItem value="ease-in-out">Ease In Out</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Delay</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.delay}
-              onChange={(e) => setSettings({ ...settings, delay: e.target.value })}
-            >
-              <option value="delay-0">0s</option>
-              <option value="delay-100">0.1s</option>
-              <option value="delay-300">0.3s</option>
-              <option value="delay-500">0.5s</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Timing</label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={settings.timing}
-              onChange={(e) => setSettings({ ...settings, timing: e.target.value })}
-            >
-              <option value="ease-linear">Linear</option>
-              <option value="ease-in">Ease In</option>
-              <option value="ease-out">Ease Out</option>
-              <option value="ease-in-out">Ease In Out</option>
-            </select>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {animations.map((anim) => (
           <TailwindSample
             key={anim.name}

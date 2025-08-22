@@ -21,49 +21,55 @@ export function TailwindSample({
   timing,
   trigger: externalTrigger = false
 }: TailwindSampleProps) {
-  const [trigger, setTrigger] = useState(false);
-  const [animating, setAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  // Use external trigger or local trigger
-  const isTriggered = externalTrigger || trigger;
-
-  // When external trigger changes, start animation
+  const handlePlay = () => {
+    setIsAnimating(true);
+  };
+  
   useEffect(() => {
     if (externalTrigger) {
-      setAnimating(true);
+      setIsAnimating(true);
     }
   }, [externalTrigger]);
 
+
   const handleAnimationEnd = () => {
-    setTrigger(false);
-    setAnimating(false);
+    // For infinite animations like spin/pulse, we don't want to remove the class
+    if (!animation.includes('spin') && !animation.includes('pulse') && !animation.includes('ping')) {
+       setIsAnimating(false);
+    }
   };
 
   const code = `
-<div className="${animation} ${duration} ${delay} ${timing}">
+<div className="
+  ${animation} 
+  ${duration} 
+  ${delay} 
+  ${timing}
+">
   <!-- Your content here -->
 </div>
   `;
 
   return (
     <AnimationSampleBase
-      title={animation}
+      title={animation.replace('animate-', '')}
       description={description}
       code={code}
       language="html"
-      onPlay={() => setTrigger(true)}
+      onPlay={handlePlay}
       codeTitle={`Tailwind - ${animation}`}
     >
-      <div
-        className={cn(
-          "w-16 h-16 mb-3 rounded-full bg-gradient-to-r from-teal-400 to-blue-500",
-          (isTriggered || animating) && animation,
-          (isTriggered || animating) && duration,
-          (isTriggered || animating) && delay,
-          (isTriggered || animating) && timing
-        )}
-        onAnimationEnd={handleAnimationEnd}
-      />
+      <div className="w-16 h-16 mb-3 flex items-center justify-center">
+        <div
+            className={cn(
+            "w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500",
+            isAnimating && `${animation} ${duration} ${delay} ${timing}`
+            )}
+            onAnimationEnd={handleAnimationEnd}
+        />
+      </div>
     </AnimationSampleBase>
   );
 }

@@ -1,6 +1,6 @@
 
 import { TextAnimate } from "@/components/magicui/text-animate";
-import { MagicUICardGrid } from "@/components/magicui/MagicUICardGrid";
+import { MagicUICardGrid } from "@/components/magic-ui-card-grid";
 
 export default function MagicUIPage() {
   return (

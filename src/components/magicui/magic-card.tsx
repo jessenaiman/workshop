@@ -1,95 +1,108 @@
+"use client";
 
-'use client';
+import { motion, useMotionTemplate, useMotionValue } from "motion/react";
+import React, { useCallback, useEffect, useRef } from "react";
+
 import { cn } from "@/lib/utils";
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-} from "react";
 
-const MouseEnterContext = createContext<
-  [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
->(undefined);
+interface MagicCardProps {
+  children?: React.ReactNode;
+  className?: string;
+  gradientSize?: number;
+  gradientColor?: string;
+  gradientOpacity?: number;
+  gradientFrom?: string;
+  gradientTo?: string;
+}
 
-export const MagicCard = ({
+export function MagicCard({
   children,
   className,
-  ...props
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMouseEntered, setIsMouseEntered] = useState(false);
+  gradientSize = 200,
+  gradientColor = "#262626",
+  gradientOpacity = 0.8,
+  gradientFrom = "#9E7AFF",
+  gradientTo = "#FE8BBB",
+}: MagicCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(-gradientSize);
+  const mouseY = useMotionValue(-gradientSize);
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (cardRef.current) {
+        const { left, top } = cardRef.current.getBoundingClientRect();
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+      }
+    },
+    [mouseX, mouseY],
+  );
+
+  const handleMouseOut = useCallback(
+    (e: MouseEvent) => {
+      if (!e.relatedTarget) {
+        document.removeEventListener("mousemove", handleMouseMove);
+        mouseX.set(-gradientSize);
+        mouseY.set(-gradientSize);
+      }
+    },
+    [handleMouseMove, mouseX, gradientSize, mouseY],
+  );
+
+  const handleMouseEnter = useCallback(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    mouseX.set(-gradientSize);
+    mouseY.set(-gradientSize);
+  }, [handleMouseMove, mouseX, gradientSize, mouseY]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const { left, top, width, height } =
-        containerRef.current.getBoundingClientRect();
-      containerRef.current.style.setProperty("--mouse-x", `${e.clientX - left}`);
-      containerRef.current.style.setProperty("--mouse-y", `${e.clientY - top}`);
-    };
-
-    if (containerRef.current) {
-        containerRef.current.addEventListener("mousemove", handleMouseMove);
-    }
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseout", handleMouseOut);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener("mousemove", handleMouseMove);
-      }
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, []);
+  }, [handleMouseEnter, handleMouseMove, handleMouseOut]);
 
-  return (
-    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
-      <div
-        ref={containerRef}
-        className={cn(
-          "relative h-full w-full overflow-hidden rounded-lg bg-background p-px shadow-lg",
-          className,
-        )}
-        onMouseEnter={() => setIsMouseEntered(true)}
-        onMouseLeave={() => setIsMouseEntered(false)}
-        {...props}
-      >
-        {children}
-      </div>
-    </MouseEnterContext.Provider>
-  );
-};
-
-export const MagicCardContent = ({
-  children,
-  className,
-  ...props
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  const [isMouseEntered] = useMouseEnter();
+  useEffect(() => {
+    mouseX.set(-gradientSize);
+    mouseY.set(-gradientSize);
+  }, [gradientSize, mouseX, mouseY]);
 
   return (
     <div
-      className={cn(
-        "relative h-full w-full rounded-lg bg-card p-4 transition-opacity duration-500",
-        isMouseEntered ? "opacity-90" : "opacity-100",
-        className,
-      )}
-      {...props}
+      ref={cardRef}
+      className={cn("group relative rounded-[inherit]", className)}
     >
-      {children}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-border duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+          radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px,
+          ${gradientFrom}, 
+          ${gradientTo}, 
+          var(--border) 100%
+          )
+          `,
+        }}
+      />
+      <div className="absolute inset-px rounded-[inherit] bg-background" />
+      <motion.div
+        className="pointer-events-none absolute inset-px rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(${gradientSize}px circle at ${mouseX}px ${mouseY}px, ${gradientColor}, transparent 100%)
+          `,
+          opacity: gradientOpacity,
+        }}
+      />
+      <div className="relative">{children}</div>
     </div>
   );
-};
-
-function useMouseEnter() {
-  const context = useContext(MouseEnterContext);
-  if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MagicCard");
-  }
-  return context;
 }

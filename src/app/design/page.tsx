@@ -17,7 +17,7 @@ const features = [
   {
     Icon: PlayCircle,
     name: "Animations",
-    description: "Explore a library of animations from Animate.css, Tailwind, and MagicUI.",
+    description: "Explore a library of animations from Animate.css, Tailwind, MagicUI, and Three.js.",
     href: "/design/animation",
     cta: "View Animations",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
@@ -42,22 +42,13 @@ const features = [
     className: "lg:row-start-1 lg:row-end-2 lg:col-start-3 lg:col-end-4",
   },
   {
-    Icon: Box,
-    name: "Three.js",
-    description: "Interactive 3D graphics and animations with Three.js.",
-    href: "/design/three",
-    cta: "View Demos",
-    background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-2 lg:row-end-3 lg:col-start-1 lg:col-end-2",
-  },
-  {
     Icon: Smartphone,
     name: "Device Mocks",
     description: "Realistic device mockups for showcasing your applications.",
     href: "/design/devices",
     cta: "View Mocks",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-3",
+    className: "lg:row-start-2 lg:row-end-3 lg:col-start-1 lg:col-end-2",
   },
   {
     Icon: MousePointer,
@@ -66,7 +57,7 @@ const features = [
     href: "/design/interactive",
     cta: "View Elements",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-2 lg:row-end-3 lg:col-start-3 lg:col-end-4",
+    className: "lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-3",
   },
   {
     Icon: Type,
@@ -75,7 +66,7 @@ const features = [
     href: "/design/text",
     cta: "View Text Effects",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-3 lg:row-end-4 lg:col-start-1 lg:col-end-2",
+    className: "lg:row-start-2 lg:row-end-3 lg:col-start-3 lg:col-end-4",
   },
   {
     Icon: Code,
@@ -84,7 +75,7 @@ const features = [
     href: "/design/utilities",
     cta: "View Utilities",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-3 lg:row-end-4 lg:col-start-2 lg:col-end-4",
+    className: "lg:row-start-3 lg:row-end-4 lg:col-start-1 lg:col-end-4",
   },
 ];
 

@@ -11,7 +11,8 @@ export default function AnimationLayout({ children }: { children: ReactNode }) {
   const tabs = [
     { href: "/design/animation/animate-css", label: "Animate.css" },
     { href: "/design/animation/tailwind", label: "Tailwind CSS" },
-    { href: "/design/animation/magicui", label: "MagicUI" }
+    { href: "/design/animation/magicui", label: "MagicUI" },
+    { href: "/design/animation/three", label: "Three.js" }
   ];
 
   return (
@@ -21,8 +22,7 @@ export default function AnimationLayout({ children }: { children: ReactNode }) {
           Animation Library
         </h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          A comprehensive collection of animations from Animate.css, Tailwind CSS, and MagicUI. 
-          Click on any animation to preview it, or use the settings to customize the behavior.
+          A comprehensive collection of animations from Animate.css, Tailwind CSS, MagicUI, and interactive 3D demos with Three.js.
         </p>
       </div>
 

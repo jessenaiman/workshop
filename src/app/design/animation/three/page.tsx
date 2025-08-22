@@ -238,11 +238,6 @@ export default function ThreeJSPage() {
                 <title>Three.js Demos</title>
             </Head>
             <div className="container mx-auto px-4 py-12">
-                <div className="text-center mb-12">
-                    <h1 className="font-headline text-5xl font-bold tracking-tight">Three.js Interactive Demos</h1>
-                    <p className="mt-2 text-lg text-muted-foreground">Explore the power of 3D graphics on the web.</p>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <Card>
                         <CardHeader>

@@ -44,7 +44,6 @@ import {
         { title: "Animations", path: "/design/animation", icon: <PlayCircle /> },
         { title: "Backgrounds", path: "/design/backgrounds", icon: <Layers /> },
         { title: "Effects", path: "/design/effects", icon: <Sparkles /> },
-        { title: "Three.js", path: "/design/three", icon: <Box /> },
         { title: "Devices", path: "/design/devices", icon: <Smartphone /> },
         { title: "Interactive", path: "/design/interactive", icon: <MousePointer /> },
         { title: "Text", path: "/design/text", icon: <Type /> },

@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { WarpBackground } from "@/components/magicui/warp-background";
 import Image from "next/image";
 
 // Professional skills categorized
@@ -39,91 +40,94 @@ const careerHighlights = [
 
 export default function AboutPage() {
     return (
-        <div className="container mx-auto px-4 py-12">
-            <section className="text-center mb-12">
-                <Image 
-                    src="https://placehold.co/200x200.png"
-                    data-ai-hint="professional portrait"
-                    alt="Jesse Naiman" 
-                    width={200} 
-                    height={200}
-                    className="w-48 h-48 rounded-full mx-auto ring-4 ring-primary ring-offset-4 ring-offset-background mb-6"
-                />
-                <h1 className="text-5xl font-bold mb-2">Jesse Naiman</h1>
-                <h2 className="text-2xl text-muted-foreground mb-4">Senior Software Engineer</h2>
-                <p className="text-lg max-w-3xl mx-auto">
-                    I'm a versatile software engineer with nearly two decades of experience building web applications, 
-                    services, and innovative solutions. My passion lies in creating efficient, maintainable code 
-                    that solves complex problems and delivers exceptional user experiences.
-                </p>
-            </section>
-            
-            <section className="mb-12">
-                <h2 className="text-3xl font-bold mb-6 border-l-4 border-primary pl-4">Technical Skills</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Frontend</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {frontendSkills.map(skill => (
-                                <div key={skill.name}>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="font-medium">{skill.name}</span>
-                                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        <div className="relative isolate min-h-screen">
+            <WarpBackground />
+            <div className="container mx-auto px-4 py-12 relative z-10">
+                <section className="text-center mb-12">
+                    <Image 
+                        src="https://placehold.co/200x200.png"
+                        data-ai-hint="professional portrait"
+                        alt="Jesse Naiman" 
+                        width={200} 
+                        height={200}
+                        className="w-48 h-48 rounded-full mx-auto ring-4 ring-primary ring-offset-4 ring-offset-background mb-6"
+                    />
+                    <h1 className="text-5xl font-bold mb-2 font-headline">Jesse Naiman</h1>
+                    <h2 className="text-2xl text-muted-foreground mb-4">Senior Software Engineer</h2>
+                    <p className="text-lg max-w-3xl mx-auto">
+                        I'm a versatile software engineer with nearly two decades of experience building web applications, 
+                        services, and innovative solutions. My passion lies in creating efficient, maintainable code 
+                        that solves complex problems and delivers exceptional user experiences.
+                    </p>
+                </section>
+                
+                <section className="mb-12">
+                    <h2 className="text-3xl font-bold font-headline mb-6 border-l-4 border-primary pl-4">Technical Skills</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Frontend</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                {frontendSkills.map(skill => (
+                                    <div key={skill.name}>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="font-medium">{skill.name}</span>
+                                            <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                                        </div>
+                                        <Progress value={skill.level} />
                                     </div>
-                                    <Progress value={skill.level} />
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Backend</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {backendSkills.map(skill => (
-                                <div key={skill.name}>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="font-medium">{skill.name}</span>
-                                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                                ))}
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Backend</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                {backendSkills.map(skill => (
+                                    <div key={skill.name}>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="font-medium">{skill.name}</span>
+                                            <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                                        </div>
+                                        <Progress value={skill.level} />
                                     </div>
-                                    <Progress value={skill.level} />
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Specialized</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {otherSkills.map(skill => (
-                                <div key={skill.name}>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="font-medium">{skill.name}</span>
-                                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                                ))}
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Specialized</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                {otherSkills.map(skill => (
+                                    <div key={skill.name}>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="font-medium">{skill.name}</span>
+                                            <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                                        </div>
+                                        <Progress value={skill.level} />
                                     </div>
-                                    <Progress value={skill.level} />
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-                </div>
-            </section>
+                                ))}
+                            </CardContent>
+                        </Card>
+                    </div>
+                </section>
 
-            <section>
-                <h2 className="text-3xl font-bold mb-6 border-l-4 border-primary pl-4">Career Highlights</h2>
-                <Card>
-                    <CardContent className="p-6">
-                        <ul className="list-disc pl-5 space-y-2">
-                            {careerHighlights.map((highlight, i) => (
-                                <li key={i}>{highlight}</li>
-                            ))}
-                        </ul>
-                    </CardContent>
-                </Card>
-            </section>
+                <section>
+                    <h2 className="text-3xl font-bold font-headline mb-6 border-l-4 border-primary pl-4">Career Highlights</h2>
+                    <Card>
+                        <CardContent className="p-6">
+                            <ul className="list-disc pl-5 space-y-2">
+                                {careerHighlights.map((highlight, i) => (
+                                    <li key={i}>{highlight}</li>
+                                ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                </section>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { Box } from 'lucide-react';
 import Link from 'next/link';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { AnimatedThemeToggler } from '@/components/magicui/animated-theme-toggler';
 
 export function Header() {
   return (
@@ -9,11 +10,14 @@ export function Header() {
         <div className="flex items-center md:hidden">
           <SidebarTrigger />
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-1 items-center space-x-2">
           <Link href="/" className="flex items-center space-x-2">
             <Box className="h-6 w-6 text-primary" />
             <span className="font-headline text-xl font-bold">MagicBox</span>
           </Link>
+        </div>
+        <div className="flex items-center gap-4">
+          <AnimatedThemeToggler />
         </div>
       </div>
     </header>

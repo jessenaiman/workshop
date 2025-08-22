@@ -253,7 +253,32 @@ body {
   }
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-name: none;
+  mix-blend-mode: normal;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes slide-from-right {
+  from { transform: translateX(30px); }
+}
+
+@keyframes slide-to-left {
+  to { transform: translateX(-30px); }
+}
+
+::view-transition-old(root) {
+  animation: 300ms ease-in-out both fade-out, 300ms ease-in-out both slide-to-left;
+}
+
+::view-transition-new(root) {
+  animation: 300ms ease-in-out both fade-in, 300ms ease-in-out both slide-from-right;
 }

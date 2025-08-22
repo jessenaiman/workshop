@@ -57,15 +57,18 @@ export function AnimateCssSample({
       language="html"
       onPlay={handlePlay}
       codeTitle={`Animate.css - ${animation}`}
+      className="h-48"
     >
-      <div
-        className={cn(
-          "w-16 h-16 mb-3 rounded-lg bg-gradient-to-r",
-          colorTheme,
-          isAnimating && `animate__animated animate__${animation} ${duration} ${delay} ${iteration}`
-        )}
-        onAnimationEnd={handleAnimationEnd}
-      />
+      <div className="w-24 h-24 flex items-center justify-center">
+        <div
+            className={cn(
+            "w-16 h-16 rounded-lg bg-gradient-to-r",
+            colorTheme,
+            isAnimating && `animate__animated animate__${animation} ${duration} ${delay} ${iteration}`
+            )}
+            onAnimationEnd={handleAnimationEnd}
+        />
+      </div>
     </AnimationSampleBase>
   );
 }

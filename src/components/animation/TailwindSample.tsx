@@ -60,8 +60,9 @@ export function TailwindSample({
       language="html"
       onPlay={handlePlay}
       codeTitle={`Tailwind - ${animation}`}
+       className="h-48"
     >
-      <div className="w-16 h-16 mb-3 flex items-center justify-center">
+      <div className="w-24 h-24 flex items-center justify-center">
         <div
             className={cn(
             "w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500",

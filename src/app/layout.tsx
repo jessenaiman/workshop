@@ -7,6 +7,7 @@ import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/app/components/app-sidebar';
 import { Footer } from '@/app/components/footer';
 import { ThemeProviderWrapper } from "@/lib/theme-provider"
+import { BackgroundProvider, BackgroundRenderer } from '@/context/BackgroundContext';
 
 export const metadata: Metadata = {
   title: 'MagicBox',
@@ -29,21 +30,24 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 light">
         <ThemeProviderWrapper>
-          <SidebarProvider>
-            <Sidebar className="border-r border-sidebar-border transition-colors duration-300 bg-sidebar-background">
-              <AppSidebar />
-            </Sidebar>
-            <SidebarInset className="bg-background transition-colors duration-300">
-              <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-1 bg-background text-foreground transition-colors duration-300">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-              <Toaster />
-            </SidebarInset>
-          </SidebarProvider>
+          <BackgroundProvider>
+            <SidebarProvider>
+              <Sidebar className="border-r border-sidebar-border transition-colors duration-300 bg-sidebar-background">
+                <AppSidebar />
+              </Sidebar>
+              <SidebarInset className="bg-background transition-colors duration-300">
+                <div className="relative flex flex-col min-h-screen">
+                  <BackgroundRenderer />
+                  <Header />
+                  <main className="flex-1 bg-transparent text-foreground transition-colors duration-300 z-10">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+                <Toaster />
+              </SidebarInset>
+            </SidebarProvider>
+          </BackgroundProvider>
         </ThemeProviderWrapper>
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" strategy="beforeInteractive" />
         <Script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19" strategy="beforeInteractive" />

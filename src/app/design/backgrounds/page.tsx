@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Paintbrush, Code, Play, Settings, SlidersHorizontal } from "lucide-react";
+import { Paintbrush, Code, Play, Settings, SlidersHorizontal, Eye } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { Layout, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -21,6 +21,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/animate-ui/radix/dialog";
 import { CodeEditor } from "@/components/animate-ui/components/code-editor";
+import { useBackground } from "@/context/BackgroundContext";
 
 function InteractiveMagicCard({ children }: { children: React.ReactNode }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -39,35 +40,38 @@ function InteractiveMagicCard({ children }: { children: React.ReactNode }) {
 
 
 export default function BackgroundsPage() {
-  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 5 });
+  const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 15 });
   const [meteorsProps, setMeteorsProps] = useState({ number: 20, minDuration: 4, maxDuration: 12 });
   const [retroGridProps, setRetroGridProps] = useState({ cellSize: 60 });
   const [replayKey, setReplayKey] = useState(0);
+  const { setBackgroundComponent } = useBackground();
+
 
   const tabOptions = [
     { id: "magicui", label: "MagicUI", color: "bg-purple-500" },
-    { id: "tailwind", label: "Tailwind CSS", color: "bg-teal-500" }
+    { id: "tailwind", label: "Tailwind CSS", color: "bg-teal-500" },
+    { id: "animateui", label: "Animate UI", color: "bg-blue-500" },
   ];
 
   const renderContent = (activeTab: string) => {
     switch (activeTab) {
       case "tailwind":
         return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {tailwindBackgrounds.map((bg, index) => (
-              <Card 
-                key={bg.name} 
-                className="p-6 text-center h-48 relative overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-105 bg-muted/30"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div
-                  className={`w-full h-24 mb-3 rounded bg-gradient-to-r ${bg.className} transition-transform duration-300 group-hover:scale-110`}
-                />
-                <CardTitle className="text-sm font-medium truncate w-full">{bg.name}</CardTitle>
-                <CardDescription className="text-xs mt-1 line-clamp-2">{bg.description}</CardDescription>
-              </Card>
-            ))}
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {tailwindBackgrounds.map((bg, index) => (
+                <Card 
+                    key={bg.name} 
+                    className="p-6 text-center h-48 relative overflow-hidden group transition-all duration-300 hover:shadow-lg hover:scale-105 bg-muted/30"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                    <div
+                    className={`w-full h-24 mb-3 rounded bg-gradient-to-r ${bg.className} transition-transform duration-300 group-hover:scale-110`}
+                    />
+                    <CardTitle className="text-sm font-medium truncate w-full">{bg.name}</CardTitle>
+                    <CardDescription className="text-xs mt-1 line-clamp-2">{bg.description}</CardDescription>
+                </Card>
+                ))}
+            </div>
         );
       case "magicui":
         return (
@@ -92,6 +96,9 @@ export default function BackgroundsPage() {
                                             <Label>Duration: {animatedGridProps.duration}s</Label>
                                             <Slider value={[animatedGridProps.duration]} onValueChange={(v) => setAnimatedGridProps({...animatedGridProps, duration: v[0]})} min={1} max={20} step={1} />
                                         </div>
+                                        <Button variant="outline" size="sm" onClick={() => setBackgroundComponent(() => <AnimatedGridPattern {...animatedGridProps} className="absolute inset-0 size-full" />)}>
+                                            <Eye className="mr-2 h-4 w-4" /> Apply to Page
+                                        </Button>
                                     </PopoverContent>
                                 </Popover>
                                 <Dialog>
@@ -125,8 +132,11 @@ export default function BackgroundsPage() {
                                 <CardTitle>Dot Pattern</CardTitle>
                                 <CardDescription>Decorative dot pattern background</CardDescription>
                             </div>
-                            <div className="flex gap-2">
-                                 <Dialog>
+                             <div className="flex gap-2">
+                                <Button variant="outline" size="sm" onClick={() => setBackgroundComponent(() => <DotPattern className={cn("[--dot-bg:theme(colors.background)] [--dot-color:hsl(var(--muted-foreground))]")} />)}>
+                                    <Eye className="mr-2 h-4 w-4" /> Apply to Page
+                                </Button>
+                                <Dialog>
                                     <DialogTrigger asChild><Button variant="ghost" size="icon"><Code className="h-4 w-4"/></Button></DialogTrigger>
                                     <DialogContent className="max-w-3xl !p-0"><CodeEditor lang="tsx" writing={false} title="Dot Pattern">{`<DotPattern />`}</CodeEditor></DialogContent>
                                 </Dialog>
@@ -162,6 +172,9 @@ export default function BackgroundsPage() {
                                             <Label>Number of Meteors: {meteorsProps.number}</Label>
                                             <Slider value={[meteorsProps.number]} onValueChange={(v) => setMeteorsProps({...meteorsProps, number: v[0]})} min={5} max={50} step={1} />
                                         </div>
+                                         <Button variant="outline" size="sm" onClick={() => setBackgroundComponent(() => <Meteors {...meteorsProps} />)}>
+                                            <Eye className="mr-2 h-4 w-4" /> Apply to Page
+                                        </Button>
                                     </PopoverContent>
                                 </Popover>
                                  <Dialog>
@@ -199,6 +212,9 @@ export default function BackgroundsPage() {
                                                 <Label>Cell Size: {retroGridProps.cellSize}</Label>
                                                 <Slider value={[retroGridProps.cellSize]} onValueChange={(v) => setRetroGridProps({cellSize: v[0]})} min={20} max={100} step={5} />
                                             </div>
+                                             <Button variant="outline" size="sm" onClick={() => setBackgroundComponent(() => <RetroGrid {...retroGridProps} className="absolute inset-0 size-full" />)}>
+                                                <Eye className="mr-2 h-4 w-4" /> Apply to Page
+                                            </Button>
                                         </PopoverContent>
                                     </Popover>
                                      <Dialog>
@@ -219,6 +235,34 @@ export default function BackgroundsPage() {
                 </Card>
             </InteractiveMagicCard>
           </div>
+        );
+      case "animateui":
+        const animateUiBackgrounds = [
+            { name: "Bubble Background", description: "Floating bubble effect." },
+            { name: "Fireworks Background", description: "Exploding fireworks animation." },
+            { name: "Gradient Background", description: "Animated gradient." },
+            { name: "Hexagon Background", description: "Tiling hexagon pattern." },
+            { name: "Hole Background", description: "Expanding hole effect." },
+            { name: "Stars Background", description: "Twinkling starfield." },
+        ];
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {animateUiBackgrounds.map(bg => (
+                    <InteractiveMagicCard key={bg.name}>
+                        <Card className="bg-muted/30">
+                            <CardHeader>
+                                <CardTitle>{bg.name}</CardTitle>
+                                <CardDescription>{bg.description}</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="relative flex justify-center items-center p-8 h-64 overflow-hidden rounded-lg bg-background">
+                                    <p className="text-muted-foreground">Preview coming soon</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </InteractiveMagicCard>
+                ))}
+            </div>
         );
       default:
         return null;

@@ -37,61 +37,63 @@ export function AnimationSampleBase({
   return (
     <TooltipProvider>
       <Card className={cn("overflow-hidden group h-full flex flex-col", className)}>
-        <CardHeader className="flex flex-row items-start justify-between">
-            <div>
-                <CardTitle>{title}</CardTitle>
-                {description && <CardDescription>{description}</CardDescription>}
-            </div>
-            <div className="flex gap-1">
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <Button variant="ghost" size="icon" onClick={onPlay} className="h-8 w-8">
-                            <PlayCircle className="w-4 h-4" />
-                        </Button>
-                    </TooltipTrigger>
-                    <TooltipContent><p>Play Animation</p></TooltipContent>
-                </Tooltip>
-                
-                <Dialog>
-                <DialogTrigger asChild>
+        <CardHeader>
+             <div className="flex flex-row items-start justify-between">
+                <div>
+                    <CardTitle>{title}</CardTitle>
+                    {description && <CardDescription>{description}</CardDescription>}
+                </div>
+                <div className="flex gap-1">
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                <Code className="w-4 h-4" />
+                            <Button variant="ghost" size="icon" onClick={onPlay} className="h-8 w-8">
+                                <PlayCircle className="w-4 h-4" />
                             </Button>
                         </TooltipTrigger>
-                        <TooltipContent><p>View Code</p></TooltipContent>
+                        <TooltipContent><p>Play Animation</p></TooltipContent>
                     </Tooltip>
-                </DialogTrigger>
-                <DialogContent className="max-w-3xl !p-0 bg-transparent border-none">
-                        <CodeEditor 
-                            lang={language}
-                            title={codeTitle || title}
-                            className="!w-full !h-auto max-h-[80vh] min-h-[400px]"
-                            copyButton
-                            writing={false}
-                            cursor={false}
-                        >
-                            {code.trim()}
-                        </CodeEditor>
-                </DialogContent>
-                </Dialog>
+                    
+                    <Dialog>
+                    <DialogTrigger asChild>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                    <Code className="w-4 h-4" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent><p>View Code</p></TooltipContent>
+                        </Tooltip>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl !p-0 bg-transparent border-none">
+                            <CodeEditor 
+                                lang={language}
+                                title={codeTitle || title}
+                                className="!w-full !h-auto max-h-[80vh] min-h-[400px]"
+                                copyButton
+                                writing={false}
+                                cursor={false}
+                            >
+                                {code.trim()}
+                            </CodeEditor>
+                    </DialogContent>
+                    </Dialog>
 
-                {controls && (
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                                        <Settings className="w-4 h-4" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent><p>Options</p></TooltipContent>
-                            </Tooltip>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-64 space-y-4">{controls}</PopoverContent>
-                    </Popover>
-                )}
+                    {controls && (
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                                            <Settings className="w-4 h-4" />
+                                        </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent><p>Options</p></TooltipContent>
+                                </Tooltip>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-64 space-y-4">{controls}</PopoverContent>
+                        </Popover>
+                    )}
+                </div>
             </div>
         </CardHeader>
         <CardContent className="flex-1 flex items-center justify-center p-4">

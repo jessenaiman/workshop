@@ -10,6 +10,31 @@ import Link from 'next/link';
 import { CodeModal } from '@/components/ui/CodeModal';
 
 export default function InteractivePage() {
+    const interactives = [
+        {
+            name: "Pulsating Button",
+            description: "Button with a gentle pulsing animation",
+            component: <PulsatingButton>Click Me</PulsatingButton>,
+            code: `<PulsatingButton>Click Me</PulsatingButton>`
+        },
+        {
+            name: "Magic Card",
+            description: "Card with magical hover effects",
+            component: (
+                <MagicCard className="w-64 h-48 flex items-center justify-center">
+                    <p className="text-center p-4">Hover over me</p>
+                </MagicCard>
+            ),
+            code: `<MagicCard>...</MagicCard>`
+        },
+        {
+            name: "Cool Mode",
+            description: "Interactive cool mode effect",
+            component: <CoolMode><Button>Click and drag me</Button></CoolMode>,
+            code: `<CoolMode><Button>Click and drag me</Button></CoolMode>`
+        }
+    ];
+
     return (
         <div className="container mx-auto py-12">
             <div className="mb-8">
@@ -30,64 +55,26 @@ export default function InteractivePage() {
                 </div>
             </div>
 
-            <div className="grid gap-8">
-            <Card>
-                <CardHeader className="flex flex-row justify-between items-start">
-                    <div>
-                        <CardTitle>Pulsating Button</CardTitle>
-                        <CardDescription>Button with a gentle pulsing animation</CardDescription>
-                    </div>
-                    <CodeModal
-                        title="Pulsating Button"
-                        code={`<PulsatingButton>Click Me</PulsatingButton>`}
-                        language="tsx"
-                        iconOnly
-                    />
-                </CardHeader>
-                <CardContent className="flex justify-center p-8">
-                    <PulsatingButton>Click Me</PulsatingButton>
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardHeader className="flex flex-row justify-between items-start">
-                    <div>
-                        <CardTitle>Magic Card</CardTitle>
-                        <CardDescription>Card with magical hover effects</CardDescription>
-                    </div>
-                    <CodeModal
-                        title="Magic Card"
-                        code={`<MagicCard>...</MagicCard>`}
-                        language="tsx"
-                        iconOnly
-                    />
-                </CardHeader>
-                <CardContent className="flex justify-center p-8">
-                    <MagicCard className="w-64 h-48 flex items-center justify-center">
-                        <p className="text-center p-4">Hover over me</p>
-                    </MagicCard>
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardHeader className="flex flex-row justify-between items-start">
-                    <div>
-                        <CardTitle>Cool Mode</CardTitle>
-                        <CardDescription>Interactive cool mode effect</CardDescription>
-                    </div>
-                    <CodeModal
-                        title="Cool Mode"
-                        code={`<CoolMode><Button>Click and drag me</Button></CoolMode>`}
-                        language="tsx"
-                        iconOnly
-                    />
-                </CardHeader>
-                <CardContent className="flex justify-center p-8">
-                    <CoolMode>
-                        <Button>Click and drag me</Button>
-                    </CoolMode>
-                </CardContent>
-            </Card>
+            <div className="grid md:grid-cols-2 gap-8">
+                {interactives.map((item) => (
+                    <Card key={item.name}>
+                        <CardHeader className="flex flex-row justify-between items-start">
+                            <div>
+                                <CardTitle>{item.name}</CardTitle>
+                                <CardDescription>{item.description}</CardDescription>
+                            </div>
+                            <CodeModal
+                                title={item.name}
+                                code={item.code}
+                                language="tsx"
+                                iconOnly
+                            />
+                        </CardHeader>
+                        <CardContent className="flex justify-center items-center p-8 min-h-[16rem]">
+                            {item.component}
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
         </div>
     )

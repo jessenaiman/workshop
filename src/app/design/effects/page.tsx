@@ -1,114 +1,51 @@
 
 "use client";
 
-import { useState } from "react";
 import { Button } from '@/components/ui/button';
 import { Layout, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import TabSwitcher from "@/components/TabSwitcher";
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CodeModal } from "@/components/ui/CodeModal";
 import { Confetti } from '@/components/magicui/confetti';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 import { Particles } from '@/components/magicui/particles';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeModal } from "@/components/ui/CodeModal";
 
 export default function EffectsPage() {
-  const tabOptions = [
-    { id: "magicui", label: "MagicUI", color: "bg-purple-500" }
-  ];
-
-  const renderContent = (activeTab: string) => {
-    switch (activeTab) {
-      case "magicui":
-        return (
-          <div className="grid gap-8 max-w-6xl mx-auto">
-            <Card>
-              <CardHeader className="flex flex-row justify-between items-start">
-                <div>
-                  <CardTitle>Confetti</CardTitle>
-                  <CardDescription>Celebratory confetti animation</CardDescription>
-                </div>
-                <CodeModal
-                  title="Confetti"
-                  code={`<Confetti />`}
-                  language="tsx"
-                  iconOnly
-                />
-              </CardHeader>
-              <CardContent>
-                <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
-                  <Confetti className="absolute inset-0 w-full h-full" />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row justify-between items-start">
-                <div>
-                  <CardTitle>Magic Card</CardTitle>
-                  <CardDescription>Interactive gradient card</CardDescription>
-                </div>
-                <CodeModal
-                  title="Magic Card"
-                  code={`<MagicCard>...</MagicCard>`}
-                  language="tsx"
-                  iconOnly
-                />
-              </CardHeader>
-              <CardContent className="flex justify-center p-8">
-                <MagicCard className="w-64 h-32 flex items-center justify-center">
-                  <p className="text-center">Hover for gradient effect</p>
-                </MagicCard>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row justify-between items-start">
-                <div>
-                  <CardTitle>Neon Gradient Card</CardTitle>
-                  <CardDescription>Eye-catching neon gradient border</CardDescription>
-                </div>
-                <CodeModal
-                  title="Neon Gradient Card"
-                  code={`<NeonGradientCard>...</NeonGradientCard>`}
-                  language="tsx"
-                  iconOnly
-                />
-              </CardHeader>
-              <CardContent className="flex justify-center p-8">
-                <NeonGradientCard className="w-64 h-32 flex items-center justify-center">
-                  <p className="text-center">Hover me</p>
-                </NeonGradientCard>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row justify-between items-start">
-                <div>
-                  <CardTitle>Particles</CardTitle>
-                  <CardDescription>Interactive particle animation</CardDescription>
-                </div>
-                <CodeModal
-                  title="Particles"
-                  code={`<Particles />`}
-                  language="tsx"
-                  iconOnly
-                />
-              </CardHeader>
-              <CardContent>
-                <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
-                  <Particles className="absolute inset-0 w-full h-full" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        );
-      default:
-        return null;
+  const effects = [
+    {
+      name: "Confetti",
+      description: "Celebratory confetti animation",
+      component: <Confetti className="absolute inset-0 w-full h-full" />,
+      code: `<Confetti />`
+    },
+    {
+      name: "Magic Card",
+      description: "Interactive gradient card",
+      component: (
+        <MagicCard className="w-64 h-32 flex items-center justify-center">
+          <p className="text-center">Hover for gradient effect</p>
+        </MagicCard>
+      ),
+      code: `<MagicCard>...</MagicCard>`
+    },
+    {
+      name: "Neon Gradient Card",
+      description: "Eye-catching neon gradient border",
+      component: (
+        <NeonGradientCard className="w-64 h-32 flex items-center justify-center">
+          <p className="text-center">Hover me</p>
+        </NeonGradientCard>
+      ),
+      code: `<NeonGradientCard>...</NeonGradientCard>`
+    },
+    {
+      name: "Particles",
+      description: "Interactive particle animation",
+      component: <Particles className="absolute inset-0 w-full h-full" />,
+      code: `<Particles />`
     }
-  };
+  ];
 
   return (
     <div className="container mx-auto py-12 space-y-8">
@@ -130,9 +67,29 @@ export default function EffectsPage() {
         </div>
       </div>
       
-      <TabSwitcher options={tabOptions} defaultTab="magicui">
-        {renderContent}
-      </TabSwitcher>
+      <div className="grid md:grid-cols-2 gap-8">
+        {effects.map((effect) => (
+            <Card key={effect.name}>
+              <CardHeader className="flex flex-row justify-between items-start">
+                <div>
+                  <CardTitle>{effect.name}</CardTitle>
+                  <CardDescription>{effect.description}</CardDescription>
+                </div>
+                <CodeModal
+                  title={effect.name}
+                  code={effect.code}
+                  language="tsx"
+                  iconOnly
+                />
+              </CardHeader>
+              <CardContent>
+                <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
+                  {effect.component}
+                </div>
+              </CardContent>
+            </Card>
+        ))}
+      </div>
     </div>
   );
 }

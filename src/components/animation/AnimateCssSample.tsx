@@ -59,7 +59,7 @@ export function AnimateCssSample({
       onPlay={handlePlay}
       codeTitle={`Animate.css - ${animation}`}
     >
-      <div className="w-full h-32 flex items-center justify-center">
+      <div className="w-full h-24 flex items-center justify-center">
         <div
             className={cn(
             "w-16 h-16 rounded-lg bg-gradient-to-r",

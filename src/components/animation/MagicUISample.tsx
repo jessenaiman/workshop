@@ -97,18 +97,6 @@ export function MagicUISample() {
       codeSnippet: `import { TypingAnimation } from "@/components/magicui/typing-animation";\n\n<TypingAnimation text="Typing..." />`
     },
     {
-        name: "Scroll Based Velocity",
-        description: "Text velocity based on scroll speed.",
-        component: (
-            <ScrollVelocityContainer>
-                <ScrollVelocityRow>
-                    <span className="text-lg font-bold">Scroll Me</span>
-                </ScrollVelocityRow>
-            </ScrollVelocityContainer>
-        ),
-        codeSnippet: `import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/magicui/scroll-based-velocity";\n\n<ScrollVelocityContainer><ScrollVelocityRow>Scroll Me</ScrollVelocityRow></ScrollVelocityContainer>`
-    },
-    {
       name: "Flip Text",
       description: "Text with a flipping character animation.",
       component: <FlipText key={replayKey} className="text-lg font-bold">Flip Text</FlipText>,

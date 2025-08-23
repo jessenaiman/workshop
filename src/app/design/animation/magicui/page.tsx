@@ -2,7 +2,6 @@
 "use client";
 
 import { MagicUISample } from "@/components/animation/MagicUISample";
-import { DockDemo } from "@/components/animation/DockDemo";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
 
 export default function MagicUIPage() {
@@ -20,7 +19,6 @@ export default function MagicUIPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         <MagicUISample />
-         <DockDemo />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { PlayCircle, Code, Settings } from "lucide-react";
+import { PlayCircle, Code, Settings, Square } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/animate-ui/radix/dialog";
 import { CodeEditor } from "@/components/animate-ui/components/code-editor";
@@ -18,6 +18,8 @@ interface AnimationSampleBaseProps {
   code: string;
   language: string;
   onPlay: () => void;
+  onStop?: () => void;
+  isPlaying?: boolean;
   className?: string;
   codeTitle?: string;
   controls?: ReactNode | null;
@@ -30,6 +32,8 @@ export function AnimationSampleBase({
   code,
   language,
   onPlay,
+  onStop,
+  isPlaying,
   className,
   codeTitle,
   controls,
@@ -46,11 +50,11 @@ export function AnimationSampleBase({
                 <div className="flex gap-1">
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button variant="ghost" size="icon" onClick={onPlay} className="h-8 w-8">
-                                <PlayCircle className="w-4 h-4" />
+                            <Button variant="ghost" size="icon" onClick={isPlaying ? onStop : onPlay} className="h-8 w-8">
+                                {isPlaying ? <Square className="w-4 h-4" /> : <PlayCircle className="w-4 h-4" />}
                             </Button>
                         </TooltipTrigger>
-                        <TooltipContent><p>Play Animation</p></TooltipContent>
+                        <TooltipContent><p>{isPlaying ? "Stop" : "Play"} Animation</p></TooltipContent>
                     </Tooltip>
                     
                     <Dialog>

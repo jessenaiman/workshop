@@ -11,7 +11,7 @@ type TailwindSampleProps = {
   duration: string;
   delay: string;
   timing: string;
-  trigger?: boolean;
+  triggerKey?: number;
 };
 
 export function TailwindSample({
@@ -20,19 +20,25 @@ export function TailwindSample({
   duration,
   delay,
   timing,
-  trigger: externalTrigger = false
+  triggerKey = 0
 }: TailwindSampleProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [key, setKey] = useState(0);
 
   const handlePlay = () => {
     setIsAnimating(true);
+    setKey(prev => prev + 1);
   };
+
+  const handleStop = () => {
+    setIsAnimating(false);
+  }
   
   useEffect(() => {
-    if (externalTrigger) {
-      setIsAnimating(true);
+    if (triggerKey > 0) {
+      handlePlay();
     }
-  }, [externalTrigger]);
+  }, [triggerKey]);
 
 
   const handleAnimationEnd = () => {
@@ -60,10 +66,13 @@ export function TailwindSample({
       code={code}
       language="html"
       onPlay={handlePlay}
+      onStop={handleStop}
+      isPlaying={isAnimating}
       codeTitle={`Tailwind - ${animation}`}
     >
       <div className="w-full h-24 flex items-center justify-center">
         <div
+            key={key}
             className={cn(
             "w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500",
             isAnimating && `${animation} ${duration} ${delay} ${timing}`

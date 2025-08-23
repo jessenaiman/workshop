@@ -11,7 +11,7 @@ type AnimateCssSampleProps = {
   duration: string;
   delay: string;
   iteration: string;
-  trigger?: boolean;
+  triggerKey?: number;
 };
 
 export function AnimateCssSample({
@@ -20,19 +20,25 @@ export function AnimateCssSample({
   duration,
   delay,
   iteration,
-  trigger: externalTrigger = false
+  triggerKey = 0
 }: AnimateCssSampleProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [key, setKey] = useState(0);
   
   const handlePlay = () => {
     setIsAnimating(true);
+    setKey(prev => prev + 1);
   };
 
+  const handleStop = () => {
+    setIsAnimating(false);
+  }
+
   useEffect(() => {
-    if (externalTrigger) {
-      setIsAnimating(true);
+    if (triggerKey > 0) {
+      handlePlay();
     }
-  }, [externalTrigger]);
+  }, [triggerKey]);
 
   const handleAnimationEnd = () => {
     setIsAnimating(false);
@@ -57,10 +63,13 @@ export function AnimateCssSample({
       code={code}
       language="html"
       onPlay={handlePlay}
+      onStop={handleStop}
+      isPlaying={isAnimating}
       codeTitle={`Animate.css - ${animation}`}
     >
       <div className="w-full h-24 flex items-center justify-center">
         <div
+            key={key}
             className={cn(
             "w-16 h-16 rounded-lg bg-gradient-to-r",
             colorTheme,

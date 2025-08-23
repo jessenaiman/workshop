@@ -13,7 +13,7 @@ export default function UtilitiesPage() {
         name: "Terminal",
         description: "Animated terminal component for displaying commands.",
         component: (
-            <Terminal className="w-full">
+            <Terminal>
                 <p>$ npm install magicui</p>
                 <p>Installing MagicUI...</p>
                 <p>$ npm run dev</p>
@@ -21,8 +21,10 @@ export default function UtilitiesPage() {
             </Terminal>
         ),
         code: `<Terminal>
-  <span>$ npm install magicui</span>
-  <span>...</span>
+  <p>$ npm install magicui</p>
+  <p>Installing MagicUI...</p>
+  <p>$ npm run dev</p>
+  <p>Starting development server...</p>
 </Terminal>`
       },
       {
@@ -30,7 +32,7 @@ export default function UtilitiesPage() {
         description: "A component to display file system structures.",
         component: (
           <FileTree className="w-full">
-            <Tree initialSelectedId="file-2.1" initialExpandedItems={["folder-1"]}>
+            <Tree initialSelectedId="file-1.2.1" initialExpandedItems={["folder-1", "folder-1.2"]}>
               <Folder value="folder-1" element="src">
                 <Folder value="folder-1.1" element="app">
                   <File value="file-1.1.1">page.tsx</File>
@@ -39,14 +41,21 @@ export default function UtilitiesPage() {
                    <File value="file-1.2.1">button.tsx</File>
                 </Folder>
               </Folder>
+               <File value="file-2">package.json</File>
             </Tree>
           </FileTree>
         ),
         code: `<FileTree>
-  <Tree>
+  <Tree initialSelectedId="file-1.2.1" initialExpandedItems={["folder-1", "folder-1.2"]}>
     <Folder value="folder-1" element="src">
-      ...
+      <Folder value="folder-1.1" element="app">
+        <File value="file-1.1.1">page.tsx</File>
+      </Folder>
+      <Folder value="folder-1.2" element="components">
+          <File value="file-1.2.1">button.tsx</File>
+      </Folder>
     </Folder>
+      <File value="file-2">package.json</File>
   </Tree>
 </FileTree>`
       }

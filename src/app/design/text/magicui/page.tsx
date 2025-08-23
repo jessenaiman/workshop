@@ -31,85 +31,85 @@ export default function MagicUIPage() {
   const components = [
     {
       name: "Text Animate",
-      component: <TextAnimate key={replayKey} className="text-2xl font-bold">Animate Me</TextAnimate>,
+      component: (text: string) => <TextAnimate key={replayKey} className="text-2xl font-bold">{text}</TextAnimate>,
     },
     {
       name: "Line Shadow Text",
-      component: <LineShadowText key={replayKey} className="text-2xl font-bold">Line Shadow</LineShadowText>,
+      component: (text: string) => <LineShadowText key={replayKey} className="text-2xl font-bold">{text}</LineShadowText>,
     },
     {
       name: "Aurora Text",
-      component: <AuroraText className="text-2xl font-bold">Aurora Text</AuroraText>,
+      component: (text: string) => <AuroraText className="text-2xl font-bold">{text}</AuroraText>,
     },
     {
       name: "Number Ticker",
-      component: <NumberTicker value={1000} className="text-2xl font-bold" />,
+      component: () => <NumberTicker value={1000} className="text-2xl font-bold" />,
     },
     {
       name: "Animated Shiny Text",
-      component: <AnimatedShinyText className="text-2xl font-bold">Shiny Text</AnimatedShinyText>,
+      component: (text: string) => <AnimatedShinyText className="text-2xl font-bold">{text}</AnimatedShinyText>,
     },
     {
       name: "Animated Gradient Text",
-      component: <AnimatedGradientText className="text-2xl font-bold">Gradient Text</AnimatedGradientText>,
+      component: (text: string) => <AnimatedGradientText className="text-2xl font-bold">{text}</AnimatedGradientText>,
     },
     {
       name: "Text Reveal",
-      component: <div className="z-10 flex min-h-[4rem] items-center justify-center rounded-lg border bg-background p-2 w-full"><TextReveal>Magic UI</TextReveal></div>,
+      component: (text: string) => <div className="z-10 flex min-h-[4rem] items-center justify-center rounded-lg border bg-background p-2 w-full"><TextReveal>{text}</TextReveal></div>,
     },
     {
       name: "Hyper Text",
-      component: <HyperText key={replayKey} className="text-2xl font-bold">Hyper Text</HyperText>,
+      component: (text: string) => <HyperText key={replayKey} className="text-2xl font-bold">{text}</HyperText>,
     },
     {
       name: "Word Rotate",
-      component: <WordRotate words={["amazing", "beautiful", "interactive"]} className="text-2xl font-bold" />,
+      component: () => <WordRotate words={["amazing", "beautiful", "interactive"]} className="text-2xl font-bold" />,
     },
     {
       name: "Typing Animation",
-      component: <TypingAnimation text="Typing..." className="text-2xl font-bold" />,
+      component: (text: string) => <TypingAnimation text={text} className="text-2xl font-bold" />,
     },
     {
         name: "Scroll Based Velocity",
-        component: (
+        component: (text: string) => (
             <ScrollVelocityContainer className="min-h-[8rem]">
                 <ScrollVelocityRow>
-                    <span className="text-2xl font-bold">Scroll Me</span>
+                    <span className="text-2xl font-bold">{text}</span>
                 </ScrollVelocityRow>
             </ScrollVelocityContainer>
         ),
     },
     {
       name: "Flip Text",
-      component: <FlipText key={replayKey} className="text-2xl font-bold">Flip Text</FlipText>,
+      component: (text: string) => <FlipText key={replayKey} className="text-2xl font-bold">{text}</FlipText>,
     },
     {
       name: "Box Reveal",
-      component: <BoxReveal key={replayKey}><p className="text-2xl font-bold">Box Reveal</p></BoxReveal>,
+      component: (text: string) => <BoxReveal key={replayKey}><p className="text-2xl font-bold">{text}</p></BoxReveal>,
     },
     {
       name: "Sparkles Text",
-      component: <SparklesText className="text-2xl font-bold">Sparkles</SparklesText>,
+      component: (text: string) => <SparklesText className="text-2xl font-bold">{text}</SparklesText>,
     },
     {
       name: "Morphing Text",
-      component: <MorphingText texts={["Morphing", "Text", "Magic"]} className="text-2xl" />,
+      component: () => <MorphingText texts={["Morphing", "Text", "Magic"]} className="text-2xl" />,
     },
     {
       name: "Spinning Text",
-      component: <SpinningText className="text-2xl font-bold">Spinning Text</SpinningText>,
+      component: (text: string) => <SpinningText className="text-2xl font-bold">{text}</SpinningText>,
     },
     {
       name: "Comic Text",
-      component: <ComicText className="text-2xl">Comic Text</ComicText>,
+      component: (text: string) => <ComicText className="text-2xl">{text}</ComicText>,
     },
   ];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {components.map((c) => (
-        <TextSample key={c.name} name={c.name} onReplay={handleReplay}>
-            {c.component}
+        <TextSample key={c.name} name={c.name} onReplay={c.name !== 'Number Ticker' && c.name !== 'Word Rotate' && c.name !== 'Morphing Text' ? handleReplay : undefined} initialText={c.name === 'Typing Animation' ? 'Typing is fun...' : c.name}>
+            {(text) => c.component(text)}
         </TextSample>
       ))}
     </div>

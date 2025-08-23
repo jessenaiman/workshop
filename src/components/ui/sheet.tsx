@@ -49,20 +49,9 @@ const sheetVariants = cva(
   }
 )
 
-interface SheetContentProps {
-  side?: 'top' | 'right' | 'bottom' | 'left';
-  className?: string;
-  children?: React.ReactNode;
-  onOpenChange?: (open: boolean) => void;
-  open?: boolean;
-  defaultOpen?: boolean;
-  modal?: boolean;
-  onOpenAutoFocus?: (event: Event) => void;
-  onCloseAutoFocus?: (event: Event) => void;
-  onEscapeKeyDown?: (event: KeyboardEvent) => void;
-  onPointerDownOutside?: (event: CustomEvent) => void;
-  onInteractOutside?: (event: CustomEvent) => void;
-}
+interface SheetContentProps
+  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
+    VariantProps<typeof sheetVariants> {}
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,

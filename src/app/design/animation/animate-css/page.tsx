@@ -99,11 +99,15 @@ export default function AnimateCssPage() {
           <h2 className="text-3xl font-semibold mb-6 text-center">{category}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {animations.map((animation) => {
-                const randomTheme = COLOR_THEMES[Math.floor(Math.random() * COLOR_THEMES.length)];
                 const code = `<div className="animate__animated animate__${animation} ${settings.duration} ${settings.delay} ${settings.iteration}"></div>`;
                 
                 const [key, setKey] = useState(0);
                 const [isAnimating, setIsAnimating] = useState(false);
+                const [randomTheme, setRandomTheme] = useState('');
+
+                React.useEffect(() => {
+                  setRandomTheme(COLOR_THEMES[Math.floor(Math.random() * COLOR_THEMES.length)]);
+                }, []);
                 
                 const handlePlay = () => {
                     setIsAnimating(true);

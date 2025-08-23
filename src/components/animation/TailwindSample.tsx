@@ -3,7 +3,11 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { DesignComponentCard } from "@/components/design/design-component-card";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Play, Code, Expand } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/animate-ui/radix/dialog";
+import { CodeEditor } from "@/components/animate-ui/components/code-editor";
 
 type TailwindSampleProps = {
   animation: string;
@@ -24,15 +28,12 @@ export function TailwindSample({
 }: TailwindSampleProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [key, setKey] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handlePlay = () => {
     setKey(prev => prev + 1);
     setIsAnimating(true);
   };
-
-  const handleStop = () => {
-    setIsAnimating(false);
-  }
   
   useEffect(() => {
     if (triggerKey > 0) {
@@ -41,13 +42,11 @@ export function TailwindSample({
   }, [triggerKey]);
 
   useEffect(() => {
-    // Auto-play once on mount
     const timer = setTimeout(handlePlay, Math.random() * 500);
     return () => clearTimeout(timer);
   }, []);
 
   const handleAnimationEnd = () => {
-    // For infinite animations like spin/pulse, we don't want to remove the class
     if (!animation.includes('spin') && !animation.includes('pulse') && !animation.includes('ping')) {
        setIsAnimating(false);
     }
@@ -64,24 +63,56 @@ export function TailwindSample({
 </div>
   `;
 
+  const content = (
+    <div
+      key={key}
+      className={cn(
+        "w-16 h-16 rounded-lg bg-gradient-to-r from-teal-400 to-blue-500",
+        isAnimating && `${animation} ${duration} ${delay} ${timing}`
+      )}
+      onAnimationEnd={handleAnimationEnd}
+    />
+  );
+
   return (
-    <DesignComponentCard
-      title={animation.replace('animate-', '')}
-      description={description}
-      code={code}
-      onPlay={handlePlay}
-      onStop={handleStop}
-      isPlaying={isAnimating}
-    >
-        <p className="text-sm text-muted-foreground absolute top-4">{description}</p>
-        <div
-            key={key}
-            className={cn(
-            "w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-blue-500",
-            isAnimating && `${animation} ${duration} ${delay} ${timing}`
-            )}
-            onAnimationEnd={handleAnimationEnd}
-        />
-    </DesignComponentCard>
+    <>
+    <Card className="flex flex-col aspect-square justify-between overflow-hidden">
+        <div className="p-4 flex justify-between items-start">
+            <div>
+                <p className="font-bold text-sm">{animation.replace('animate-', '')}</p>
+                <p className="text-xs text-muted-foreground">{description}</p>
+            </div>
+            <div className="flex gap-1">
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handlePlay}>
+                    <Play className="h-4 w-4" />
+                </Button>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="ghost" size="icon" className="h-8 w-8"><Code className="h-4 w-4"/></Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl !p-0 bg-transparent border-none">
+                        <CodeEditor lang="tsx" writing={false} title={animation}>{code.trim()}</CodeEditor>
+                    </DialogContent>
+                </Dialog>
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setIsFullscreen(true)}>
+                    <Expand className="h-4 w-4"/>
+                </Button>
+            </div>
+        </div>
+        <div className="flex-1 flex items-center justify-center p-6 bg-background/50">
+            {content}
+        </div>
+      </Card>
+      {isFullscreen && (
+        <div className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-sm flex items-center justify-center">
+            <div className="relative size-full max-w-lg max-h-lg flex items-center justify-center">
+                {content}
+                <Button variant="outline" size="icon" className="absolute top-4 right-4 z-10" onClick={() => setIsFullscreen(false)}>
+                    <Expand className="h-4 w-4 rotate-45" />
+                </Button>
+            </div>
+        </div>
+      )}
+    </>
   );
 }

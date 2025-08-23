@@ -23,10 +23,10 @@ export default function TailwindPage() {
   };
 
   const animations = [
-    { name: "animate-bounce", description: "Bounce animation" },
-    { name: "animate-ping", description: "Ping animation" },
-    { name: "animate-pulse", description: "Pulse animation" },
-    { name: "animate-spin", description: "Spin animation" },
+    { name: "animate-bounce", description: "Bounces up and down." },
+    { name: "animate-ping", description: "Scales up with a fade." },
+    { name: "animate-pulse", description: "Gently fades in and out." },
+    { name: "animate-spin", description: "Spins indefinitely." },
   ];
 
   return (

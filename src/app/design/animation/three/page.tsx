@@ -11,6 +11,7 @@ import { initDemo4 } from '@/lib/threeDemo4.js';
 import { vertexShader } from '@/lib/vertexShader.js';
 import { fragmentShader } from '@/lib/fragmentShader.js';
 import { DesignComponentCard } from '@/components/design/design-component-card';
+import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 
 
 // Declare lil-gui and THREE on Window interface to resolve TypeScript errors
@@ -194,7 +195,15 @@ export default function ThreeJSPage() {
             <Head>
                 <title>Three.js Demos</title>
             </Head>
-            <div className="container mx-auto px-4 py-12">
+            <div className="container mx-auto px-4 py-12 space-y-8">
+                 <NeonGradientCard className="mb-4">
+                    <div className="p-8">
+                        <h3 className="text-2xl font-semibold mb-2 text-center">Three.js Interactive Demos</h3>
+                        <p className="text-sm text-muted-foreground text-center">
+                        Explore real-time 3D graphics with Three.js. Use the controls on each card to manipulate the scenes.
+                        </p>
+                    </div>
+                </NeonGradientCard>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {demos.map(demo => (
                         <DesignComponentCard

@@ -19,7 +19,6 @@ import { SparklesText } from "@/components/magicui/sparkles-text";
 import { MorphingText } from "@/components/magicui/morphing-text";
 import { SpinningText } from "@/components/magicui/spinning-text";
 import { ComicText } from "@/components/magicui/comic-text";
-import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/magicui/scroll-based-velocity";
 
 interface ComponentInfo {
   name: string;

@@ -8,7 +8,7 @@ import { HomeIcon, SettingsIcon, MailIcon } from "lucide-react";
 
 export function DockDemo() {
   return (
-    <div className="flex justify-center items-center h-full w-full">
+    <div className="relative flex justify-center items-center h-full w-full">
       <Dock>
         <DockIcon>
           <HomeIcon className="size-4" />
@@ -31,7 +31,7 @@ export function DockDemo() {
       description="A macOS-style dock with hover magnification."
       code={codeSnippet}
     >
-      <div className="flex justify-center items-center w-full h-full pt-4 min-h-[8rem]">
+      <div className="relative flex justify-center items-center w-full h-full pt-4 min-h-[8rem]">
         <Dock>
           <DockIcon>
             <HomeIcon className="size-4" />

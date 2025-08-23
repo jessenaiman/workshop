@@ -4,12 +4,11 @@
 import { Button } from '@/components/ui/button';
 import { Layout, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeModal } from "@/components/ui/CodeModal";
 import { Confetti } from '@/components/magicui/confetti';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { NeonGradientCard } from '@/components/magicui/neon-gradient-card';
 import { Particles } from '@/components/magicui/particles';
+import { DesignComponentCard } from '@/components/design/design-component-card';
 
 export default function EffectsPage() {
   const effects = [
@@ -69,25 +68,16 @@ export default function EffectsPage() {
       
       <div className="grid md:grid-cols-2 gap-8">
         {effects.map((effect) => (
-            <Card key={effect.name}>
-              <CardHeader className="flex flex-row justify-between items-start">
-                <div>
-                  <CardTitle>{effect.name}</CardTitle>
-                  <CardDescription>{effect.description}</CardDescription>
-                </div>
-                <CodeModal
-                  title={effect.name}
-                  code={effect.code}
-                  language="tsx"
-                  iconOnly
-                />
-              </CardHeader>
-              <CardContent>
-                <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
-                  {effect.component}
-                </div>
-              </CardContent>
-            </Card>
+            <DesignComponentCard
+              key={effect.name}
+              title={effect.name}
+              description={effect.description}
+              code={effect.code}
+            >
+              <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
+                {effect.component}
+              </div>
+            </DesignComponentCard>
         ))}
       </div>
     </div>

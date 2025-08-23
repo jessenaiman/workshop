@@ -19,7 +19,7 @@ import { GradientBackground } from "@/components/animate-ui/backgrounds/gradient
 import { HexagonBackground } from "@/components/animate-ui/backgrounds/hexagon";
 import { HoleBackground } from "@/components/animate-ui/backgrounds/hole";
 import { StarsBackground } from "@/components/animate-ui/backgrounds/stars";
-import { BackgroundCard } from "@/components/design/background-card";
+import { DesignComponentCard } from "@/components/design/design-component-card";
 
 export default function BackgroundsPage() {
   const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 30 });
@@ -38,7 +38,7 @@ export default function BackgroundsPage() {
     {
       name: "Animated Grid Pattern",
       description: "Dynamic grid pattern animation",
-      component: <AnimatedGridPattern key={`grid-${replayKey}`} className="absolute inset-0 size-full" {...animatedGridProps} />,
+      component: <AnimatedGridPattern key={`grid-${replayKey}`} className="absolute inset-0 size-full bg-white dark:bg-black" {...animatedGridProps} />,
       code: `<AnimatedGridPattern maxOpacity={${animatedGridProps.maxOpacity}} duration={${animatedGridProps.duration}} />`,
       controls: (
         <>
@@ -66,7 +66,7 @@ export default function BackgroundsPage() {
     {
       name: "Meteors",
       description: "Falling meteor animation effect",
-      component: <Meteors key={`meteors-${replayKey}`} {...meteorsProps} />,
+      component: <div className="relative h-full w-full bg-background"><Meteors key={`meteors-${replayKey}`} {...meteorsProps} /></div>,
       code: `<Meteors number={${meteorsProps.number}} />`,
       controls: (
         <div className="space-y-2">
@@ -94,7 +94,7 @@ export default function BackgroundsPage() {
 
   const animateUiBackgrounds = [
     { name: "Bubble Background", description: "Floating bubble effect.", component: <BubbleBackground className="absolute inset-0 size-full" />, code: "<BubbleBackground />", onApply: () => setBackgroundComponent(() => <BubbleBackground className="absolute inset-0 size-full" />) },
-    { name: "Fireworks Background", description: "Exploding fireworks animation.", component: <FireworksBackground className="absolute inset-0 size-full" />, code: "<FireworksBackground />", onApply: () => setBackgroundComponent(() => <FireworksBackground className="absolute inset-0 size-full" />) },
+    { name: "Fireworks Background", description: "Exploding fireworks animation.", component: <FireworksBackground className="absolute inset-0 size-full bg-black" />, code: "<FireworksBackground />", onApply: () => setBackgroundComponent(() => <FireworksBackground className="absolute inset-0 size-full" />) },
     { name: "Gradient Background", description: "Animated gradient.", component: <GradientBackground className="absolute inset-0 size-full" />, code: "<GradientBackground />", onApply: () => setBackgroundComponent(() => <GradientBackground className="absolute inset-0 size-full" />) },
     { name: "Hexagon Background", description: "Tiling hexagon pattern.", component: <HexagonBackground className="absolute inset-0 size-full" />, code: "<HexagonBackground />", onApply: () => setBackgroundComponent(() => <HexagonBackground className="absolute inset-0 size-full" />) },
     { name: "Hole Background", description: "Expanding hole effect.", component: <HoleBackground className="absolute inset-0 size-full" />, code: "<HoleBackground />", onApply: () => setBackgroundComponent(() => <HoleBackground className="absolute inset-0 size-full" />) },
@@ -116,17 +116,16 @@ export default function BackgroundsPage() {
         return (
           <div className={gridClass}>
             {tailwindBackgrounds.map((bg) => (
-              <BackgroundCard
+              <DesignComponentCard
                 key={bg.name}
                 title={bg.name}
                 description={bg.description}
                 code={bg.code}
                 controls={null}
                 onApply={null}
-                isInteractive={false}
               >
                 <div className={cn("w-full h-full rounded bg-gradient-to-r", bg.className)} />
-              </BackgroundCard>
+              </DesignComponentCard>
             ))}
           </div>
         );
@@ -134,7 +133,7 @@ export default function BackgroundsPage() {
         return (
           <div className={gridClass}>
             {magicUiComponents.map((item) => (
-              <BackgroundCard
+              <DesignComponentCard
                 key={item.name}
                 title={item.name}
                 description={item.description}
@@ -147,7 +146,7 @@ export default function BackgroundsPage() {
                 <div className="relative z-10 flex items-center justify-center">
                     <p className="text-center font-medium text-muted-foreground/50">{item.name}</p>
                 </div>
-              </BackgroundCard>
+              </DesignComponentCard>
             ))}
           </div>
         );
@@ -155,7 +154,7 @@ export default function BackgroundsPage() {
         return (
           <div className={gridClass}>
             {animateUiBackgrounds.map(bg => (
-              <BackgroundCard
+              <DesignComponentCard
                 key={bg.name}
                 title={bg.name}
                 description={bg.description}
@@ -164,7 +163,7 @@ export default function BackgroundsPage() {
                 controls={null}
               >
                 {bg.component}
-              </BackgroundCard>
+              </DesignComponentCard>
             ))}
           </div>
         );

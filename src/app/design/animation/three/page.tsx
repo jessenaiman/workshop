@@ -1,7 +1,7 @@
+
 "use client";
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { initDemo1 } from '@/lib/threeDemo1.js';
@@ -10,7 +10,7 @@ import { initDemo3 } from '@/lib/threeDemo3.js';
 import { initDemo4 } from '@/lib/threeDemo4.js';
 import { vertexShader } from '@/lib/vertexShader.js';
 import { fragmentShader } from '@/lib/fragmentShader.js';
-import { AnimationSampleBase } from '@/components/animation/AnimationSampleBase';
+import { DesignComponentCard } from '@/components/design/design-component-card';
 
 
 // Declare lil-gui and THREE on Window interface to resolve TypeScript errors
@@ -197,19 +197,18 @@ export default function ThreeJSPage() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {demos.map(demo => (
-                        <AnimationSampleBase
+                        <DesignComponentCard
                             key={demo.id}
                             title={demo.title}
+                            description="Interactive 3D animation"
                             code={demo.code}
-                            language="javascript"
-                            onPlay={() => {}}
                             controls={scriptsLoaded ? demo.controls : null}
                             className="h-auto"
                         >
                             <div id={`${demo.id}-container`} className="relative w-full h-64 rounded-lg overflow-hidden bg-muted">
                                 <canvas id={demo.id} className="w-full h-full"></canvas>
                             </div>
-                        </AnimationSampleBase>
+                        </DesignComponentCard>
                     ))}
                 </div>
             </div>

@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimationSampleBase } from "@/components/animation/AnimationSampleBase";
 import { cn } from "@/lib/utils";
+import { DesignComponentCard } from "@/components/design/design-component-card";
 
 type AnimateCssSampleProps = {
   animation: string;
@@ -58,14 +58,13 @@ export function AnimateCssSample({
   `;
 
   return (
-    <AnimationSampleBase
+    <DesignComponentCard
       title={animation}
+      description={`Animate.css - ${animation}`}
       code={code}
-      language="html"
       onPlay={handlePlay}
       onStop={handleStop}
       isPlaying={isAnimating}
-      codeTitle={`Animate.css - ${animation}`}
     >
       <div className="w-full h-24 flex items-center justify-center">
         <div
@@ -78,6 +77,6 @@ export function AnimateCssSample({
             onAnimationEnd={handleAnimationEnd}
         />
       </div>
-    </AnimationSampleBase>
+    </DesignComponentCard>
   );
 }

@@ -1,11 +1,10 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Code, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { CodeModal } from '@/components/ui/CodeModal';
 import { Terminal } from '@/components/magicui/terminal';
 import { FileTree, Tree, Folder, File } from '@/components/magicui/file-tree';
+import { DesignComponentCard } from '@/components/design/design-component-card';
 
 export default function UtilitiesPage() {
     const utilities = [
@@ -83,25 +82,16 @@ export default function UtilitiesPage() {
     
             <div className="grid md:grid-cols-2 gap-8">
                 {utilities.map(item => (
-                    <Card key={item.name}>
-                        <CardHeader className="flex flex-row justify-between items-start">
-                        <div>
-                            <CardTitle>{item.name}</CardTitle>
-                            <CardDescription>{item.description}</CardDescription>
-                        </div>
-                        <CodeModal 
-                            title={item.name}
-                            code={item.code}
-                            language="tsx"
-                            iconOnly
-                        />
-                        </CardHeader>
-                        <CardContent>
+                    <DesignComponentCard
+                        key={item.name}
+                        title={item.name}
+                        description={item.description}
+                        code={item.code}
+                    >
                           <div className="p-4 rounded-lg bg-background min-h-[16rem] flex items-center justify-center">
                             {item.component}
                           </div>
-                        </CardContent>
-                    </Card>
+                    </DesignComponentCard>
                 ))}
             </div>
       </div>

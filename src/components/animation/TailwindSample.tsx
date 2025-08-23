@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimationSampleBase } from "@/components/animation/AnimationSampleBase";
 import { cn } from "@/lib/utils";
+import { DesignComponentCard } from "@/components/design/design-component-card";
 
 type TailwindSampleProps = {
   animation: string;
@@ -60,15 +60,13 @@ export function TailwindSample({
   `;
 
   return (
-    <AnimationSampleBase
+    <DesignComponentCard
       title={animation.replace('animate-', '')}
       description={description}
       code={code}
-      language="html"
       onPlay={handlePlay}
       onStop={handleStop}
       isPlaying={isAnimating}
-      codeTitle={`Tailwind - ${animation}`}
     >
       <div className="w-full h-24 flex items-center justify-center">
         <div
@@ -80,6 +78,6 @@ export function TailwindSample({
             onAnimationEnd={handleAnimationEnd}
         />
       </div>
-    </AnimationSampleBase>
+    </DesignComponentCard>
   );
 }

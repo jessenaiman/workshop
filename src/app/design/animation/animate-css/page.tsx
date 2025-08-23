@@ -24,6 +24,52 @@ export default function AnimateCssPage() {
     setTriggerKey(prev => prev + 1);
   };
 
+  const animationControls = (
+    <>
+        <div>
+            <Label htmlFor="duration">Duration</Label>
+            <Select value={settings.duration} onValueChange={(value) => setSettings({ ...settings, duration: value })}>
+                <SelectTrigger id="duration">
+                <SelectValue placeholder="Select duration" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="animate__duration-0.5s">0.5s</SelectItem>
+                <SelectItem value="animate__duration-1s">1s</SelectItem>
+                <SelectItem value="animate__duration-2s">2s</SelectItem>
+                <SelectItem value="animate__duration-3s">3s</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
+            <div>
+            <Label htmlFor="delay">Delay</Label>
+            <Select value={settings.delay} onValueChange={(value) => setSettings({ ...settings, delay: value })}>
+                <SelectTrigger id="delay">
+                <SelectValue placeholder="Select delay" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="animate__delay-0s">0s</SelectItem>
+                <SelectItem value="animate__delay-1s">1s</SelectItem>
+                <SelectItem value="animate__delay-2s">2s</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
+            <div>
+            <Label htmlFor="iteration">Iteration</Label>
+            <Select value={settings.iteration} onValueChange={(value) => setSettings({ ...settings, iteration: value })}>
+                <SelectTrigger id="iteration">
+                <SelectValue placeholder="Select iteration" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="animate__repeat-1">1</SelectItem>
+                <SelectItem value="animate__repeat-2">2</SelectItem>
+                <SelectItem value="animate__repeat-3">3</SelectItem>
+                <SelectItem value="animate__repeat-infinite">Infinite</SelectItem>
+                </SelectContent>
+            </Select>
+        </div>
+    </>
+  );
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-start mb-4 gap-8">
@@ -35,47 +81,7 @@ export default function AnimateCssPage() {
                 </CardHeader>
                 <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                    <Label htmlFor="duration">Duration</Label>
-                    <Select value={settings.duration} onValueChange={(value) => setSettings({ ...settings, duration: value })}>
-                        <SelectTrigger id="duration">
-                        <SelectValue placeholder="Select duration" />
-                        </SelectTrigger>
-                        <SelectContent>
-                        <SelectItem value="animate__duration-0.5s">0.5s</SelectItem>
-                        <SelectItem value="animate__duration-1s">1s</SelectItem>
-                        <SelectItem value="animate__duration-2s">2s</SelectItem>
-                        <SelectItem value="animate__duration-3s">3s</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    </div>
-                    <div>
-                    <Label htmlFor="delay">Delay</Label>
-                    <Select value={settings.delay} onValueChange={(value) => setSettings({ ...settings, delay: value })}>
-                        <SelectTrigger id="delay">
-                        <SelectValue placeholder="Select delay" />
-                        </SelectTrigger>
-                        <SelectContent>
-                        <SelectItem value="animate__delay-0s">0s</SelectItem>
-                        <SelectItem value="animate__delay-1s">1s</SelectItem>
-                        <SelectItem value="animate__delay-2s">2s</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    </div>
-                    <div>
-                    <Label htmlFor="iteration">Iteration</Label>
-                    <Select value={settings.iteration} onValueChange={(value) => setSettings({ ...settings, iteration: value })}>
-                        <SelectTrigger id="iteration">
-                        <SelectValue placeholder="Select iteration" />
-                        </SelectTrigger>
-                        <SelectContent>
-                        <SelectItem value="animate__repeat-1">1</SelectItem>
-                        <SelectItem value="animate__repeat-2">2</SelectItem>
-                        <SelectItem value="animate__repeat-3">3</SelectItem>
-                        <SelectItem value="animate__repeat-infinite">Infinite</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    </div>
+                    {animationControls}
                 </div>
                 </CardContent>
             </Card>

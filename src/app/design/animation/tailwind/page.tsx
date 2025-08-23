@@ -98,7 +98,7 @@ export default function TailwindPage() {
             duration={settings.duration}
             delay={settings.delay}
             timing={settings.timing}
-            trigger={triggerAll}
+            triggerKey={triggerAll ? 1 : 0}
           />
         ))}
       </div>

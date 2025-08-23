@@ -1,13 +1,12 @@
 
 'use client';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { PulsatingButton } from '@/components/magicui/pulsating-button';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { CoolMode } from '@/components/magicui/cool-mode';
 import { MousePointer, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { CodeModal } from '@/components/ui/CodeModal';
+import { Button } from '@/components/ui/button';
+import { DesignComponentCard } from '@/components/design/design-component-card';
 
 export default function InteractivePage() {
     const interactives = [
@@ -57,23 +56,16 @@ export default function InteractivePage() {
 
             <div className="grid md:grid-cols-2 gap-8">
                 {interactives.map((item) => (
-                    <Card key={item.name}>
-                        <CardHeader className="flex flex-row justify-between items-start">
-                            <div>
-                                <CardTitle>{item.name}</CardTitle>
-                                <CardDescription>{item.description}</CardDescription>
-                            </div>
-                            <CodeModal
-                                title={item.name}
-                                code={item.code}
-                                language="tsx"
-                                iconOnly
-                            />
-                        </CardHeader>
-                        <CardContent className="flex justify-center items-center p-8 min-h-[16rem]">
+                    <DesignComponentCard
+                        key={item.name}
+                        title={item.name}
+                        description={item.description}
+                        code={item.code}
+                    >
+                         <div className="flex justify-center items-center p-8 min-h-[16rem]">
                             {item.component}
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </DesignComponentCard>
                 ))}
             </div>
         </div>

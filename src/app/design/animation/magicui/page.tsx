@@ -21,6 +21,7 @@ import { SpinningText } from "@/components/magicui/spinning-text";
 import { ComicText } from "@/components/magicui/comic-text";
 import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/magicui/scroll-based-velocity";
 import { useState } from "react";
+import { DesignComponentCard } from "@/components/design/design-component-card";
 
 export default function MagicUIPage() {
   const [replayKey, setReplayKey] = useState(0);
@@ -152,20 +153,18 @@ export default function MagicUIPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {components.map((component, idx) => (
-          <MagicUISample
+          <DesignComponentCard
             key={idx}
-            name={component.name}
+            title={component.name}
             description={component.description}
-            codeSnippet={component.codeSnippet}
+            code={component.codeSnippet}
             onReplay={handleReplay}
           >
             {component.component}
-          </MagicUISample>
+          </DesignComponentCard>
         ))}
          <DockDemo />
       </div>
     </div>
   );
 }
-
-    

@@ -1,7 +1,7 @@
 
 import { HomeIcon, SettingsIcon, MailIcon } from "lucide-react";
-import { AnimationSampleBase } from "@/components/animation/AnimationSampleBase";
 import { Dock, DockIcon } from "@/components/magicui/dock";
+import { DesignComponentCard } from "@/components/design/design-component-card";
 
 const codeSnippet = `import { Dock, DockIcon } from "@/components/magicui/dock";
 import { HomeIcon, SettingsIcon, MailIcon } from "lucide-react";
@@ -25,20 +25,13 @@ export function DockDemo() {
 }`;
 
 export function DockDemo() {
-  const handlePlay = () => {
-    // Dock is interactive on hover, no programmatic trigger needed.
-  };
-
   return (
-    <AnimationSampleBase
+    <DesignComponentCard
       title="MacOS Dock"
       description="A macOS-style dock with hover magnification."
       code={codeSnippet}
-      language="tsx"
-      onPlay={handlePlay}
-      codeTitle="MagicUI - Dock"
     >
-      <div className="flex justify-center items-center w-full h-full pt-4">
+      <div className="flex justify-center items-center w-full h-full pt-4 min-h-[8rem]">
         <Dock>
           <DockIcon>
             <HomeIcon className="size-4" />
@@ -51,6 +44,6 @@ export function DockDemo() {
           </DockIcon>
         </Dock>
       </div>
-    </AnimationSampleBase>
+    </DesignComponentCard>
   );
 }

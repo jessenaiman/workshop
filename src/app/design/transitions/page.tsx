@@ -2,12 +2,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeBlock } from '@/app/components/code-block';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Image from 'next/image';
+import { DesignComponentCard } from '@/components/design/design-component-card';
 
 const tailwindTransitionCode = `
 <div class="transition-all duration-500 ease-in-out hover:bg-primary hover:text-primary-foreground p-4 rounded-lg">
@@ -111,113 +110,84 @@ export default function TransitionsPage() {
         </TabsList>
 
         <TabsContent value="tailwind">
-            <div className="space-y-8">
-                <Card>
-                    <CardHeader>
-                    <CardTitle>Utility-First Transitions</CardTitle>
-                    <CardDescription>
-                        Use Tailwind's transition and transform classes for simple, declarative animations on hover, focus, and other states.
-                    </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                    <div className="mb-6 p-8 flex items-center justify-center bg-muted rounded-lg">
-                        <div className="transition-all duration-500 ease-in-out hover:bg-primary hover:text-primary-foreground p-4 rounded-lg cursor-pointer text-center">
-                            Hover over me
-                        </div>
+            <div className="grid md:grid-cols-2 gap-8">
+                <DesignComponentCard
+                    title="Utility-First Transitions"
+                    description="Use Tailwind's transition and transform classes for simple, declarative animations on hover, focus, and other states."
+                    code={tailwindTransitionCode}
+                >
+                    <div className="transition-all duration-500 ease-in-out hover:bg-primary hover:text-primary-foreground p-4 rounded-lg cursor-pointer text-center">
+                        Hover over me
                     </div>
-                    <CodeBlock code={tailwindTransitionCode} />
-                    </CardContent>
-                </Card>
+                </DesignComponentCard>
             </div>
         </TabsContent>
 
         <TabsContent value="framer">
-            <div className="space-y-8">
-                <Card>
-                    <CardHeader>
-                    <CardTitle>Staggered List Animation</CardTitle>
-                    <CardDescription>
-                        Animate list items sequentially for a pleasing effect.
-                    </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                    <div className="mb-6 p-8 bg-muted rounded-lg min-h-[200px]">
-                        <Button onClick={() => setShow(!show)} className="mb-4">
-                        Toggle List
-                        </Button>
-                        <AnimatePresence>
-                        {show && (
-                            <motion.ul
+            <div className="grid md:grid-cols-2 gap-8">
+                <DesignComponentCard
+                    title="Staggered List Animation"
+                    description="Animate list items sequentially for a pleasing effect."
+                    code={framerMotionCode}
+                    controls={<Button onClick={() => setShow(!show)}>Toggle List</Button>}
+                >
+                    <AnimatePresence>
+                    {show && (
+                        <motion.ul
+                        variants={{
+                            visible: {
+                            opacity: 1,
+                            transition: { when: "beforeChildren", staggerChildren: 0.1 },
+                            },
+                            hidden: { opacity: 0 },
+                        }}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        className="space-y-2"
+                        >
+                        {framerItems.map((item) => (
+                            <motion.li
+                            key={item}
                             variants={{
-                                visible: {
-                                opacity: 1,
-                                transition: { when: "beforeChildren", staggerChildren: 0.1 },
-                                },
-                                hidden: { opacity: 0 },
+                                visible: { opacity: 1, y: 0 },
+                                hidden: { opacity: 0, y: 20 },
                             }}
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
-                            className="space-y-2"
+                            className="p-2 bg-background rounded"
                             >
-                            {framerItems.map((item) => (
-                                <motion.li
-                                key={item}
-                                variants={{
-                                    visible: { opacity: 1, y: 0 },
-                                    hidden: { opacity: 0, y: 20 },
-                                }}
-                                className="p-2 bg-background rounded"
-                                >
-                                {item}
-                                </motion.li>
-                            ))}
-                            </motion.ul>
-                        )}
-                        </AnimatePresence>
-                    </div>
-                    <CodeBlock code={framerMotionCode} />
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Image Cross-Fade</CardTitle>
-                        <CardDescription>
-                            Smoothly transition between different images.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="mb-6 p-8 bg-muted rounded-lg flex flex-col items-center justify-center gap-4">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={imageIndex}
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -50 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="w-[400px] h-[300px] relative"
-                                >
-                                    <Image src={images[imageIndex]} alt="Swapping Image" layout="fill" objectFit="cover" className="rounded-md" data-ai-hint="abstract landscape" />
-                                </motion.div>
-                            </AnimatePresence>
-                            <Button onClick={() => setImageIndex((p) => (p + 1) % images.length)}>
-                                Next Image
-                            </Button>
-                        </div>
-                        <CodeBlock code={imageSwapCode} />
-                    </CardContent>
-                </Card>
-                 <Card>
-                    <CardHeader>
-                        <CardTitle>Page Transitions</CardTitle>
-                        <CardDescription>
-                            Animate pages as they enter and exit. This is implemented at the layout level.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <CodeBlock code={pageTransitionCode} />
-                    </CardContent>
-                </Card>
+                            {item}
+                            </motion.li>
+                        ))}
+                        </motion.ul>
+                    )}
+                    </AnimatePresence>
+                </DesignComponentCard>
+                <DesignComponentCard
+                    title="Image Cross-Fade"
+                    description="Smoothly transition between different images."
+                    code={imageSwapCode}
+                    controls={<Button onClick={() => setImageIndex((p) => (p + 1) % images.length)}>Next Image</Button>}
+                >
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={imageIndex}
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -50 }}
+                            transition={{ duration: 0.5 }}
+                            className="w-[400px] h-[300px] relative"
+                        >
+                            <Image src={images[imageIndex]} alt="Swapping Image" layout="fill" objectFit="cover" className="rounded-md" data-ai-hint="abstract landscape" />
+                        </motion.div>
+                    </AnimatePresence>
+                </DesignComponentCard>
+                 <DesignComponentCard
+                    title="Page Transitions"
+                    description="Animate pages as they enter and exit. This is implemented at the layout level."
+                    code={pageTransitionCode}
+                >
+                    <p className="text-muted-foreground">This effect is applied to the page layout and can't be previewed here.</p>
+                </DesignComponentCard>
             </div>
         </TabsContent>
       </Tabs>

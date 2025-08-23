@@ -1,49 +1,31 @@
 
 'use client';
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/animate-ui/radix/dialog";
 import { CodeEditor } from "@/components/animate-ui/components/code-editor";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { MagicCard } from '@/components/magicui/magic-card';
-import { BorderBeam } from '@/components/magicui/border-beam';
-import { ShineBorder } from '@/components/magicui/shine-border';
-import { Eye, Settings, Code, Expand, Play } from "lucide-react";
+import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Eye, Settings, Code, Expand, Play, Square } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface BackgroundCardProps {
+interface DesignComponentCardProps {
     children: React.ReactNode;
     title: string;
     description: string;
     code: string;
-    controls: React.ReactNode | null;
-    onApply: (() => void) | null;
+    controls?: ReactNode | null;
+    onApply?: (() => void) | null;
     onReplay?: () => void;
-    isInteractive?: boolean;
+    onPlay?: () => void;
+    onStop?: () => void;
+    isPlaying?: boolean;
+    className?: string;
 }
 
-function InteractiveMagicCard({ children, isInteractive }: { children: React.ReactNode, isInteractive: boolean }) {
-    const [isHovered, setIsHovered] = useState(false);
-
-    if (!isInteractive) {
-        return <div className="w-full">{children}</div>;
-    }
-
-    return (
-        <MagicCard
-            className="w-full"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-             {isHovered ? <BorderBeam size={250} duration={12} delay={9} /> : <ShineBorder />}
-            {children}
-        </MagicCard>
-    );
-}
-
-export function BackgroundCard({ 
+export function DesignComponentCard({ 
     children, 
     title, 
     description, 
@@ -51,12 +33,15 @@ export function BackgroundCard({
     controls,
     onApply,
     onReplay,
-    isInteractive = true,
-}: BackgroundCardProps) {
+    onPlay,
+    onStop,
+    isPlaying,
+    className,
+}: DesignComponentCardProps) {
     const [isFullscreen, setIsFullscreen] = useState(false);
 
     const cardContent = (
-        <Card className="bg-muted/30 h-full flex flex-col">
+        <Card className={cn("bg-muted/30 h-full flex flex-col", className)}>
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>
@@ -67,7 +52,7 @@ export function BackgroundCard({
                         {onApply && (
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon" onClick={onApply}><Eye className="h-4 w-4"/></Button>
+                                    <Button variant="ghost" size="icon" onClick={onApply} className="h-8 w-8"><Eye className="h-4 w-4"/></Button>
                                 </TooltipTrigger>
                                 <TooltipContent><p>Apply to Page</p></TooltipContent>
                             </Tooltip>
@@ -76,7 +61,7 @@ export function BackgroundCard({
                              <Popover>
                                 <PopoverTrigger asChild>
                                     <Tooltip>
-                                        <TooltipTrigger asChild><Button variant="ghost" size="icon"><Settings className="h-4 w-4"/></Button></TooltipTrigger>
+                                        <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><Settings className="h-4 w-4"/></Button></TooltipTrigger>
                                         <TooltipContent><p>Options</p></TooltipContent>
                                     </Tooltip>
                                 </PopoverTrigger>
@@ -86,33 +71,43 @@ export function BackgroundCard({
                         <Dialog>
                             <DialogTrigger asChild>
                                  <Tooltip>
-                                    <TooltipTrigger asChild><Button variant="ghost" size="icon"><Code className="h-4 w-4"/></Button></TooltipTrigger>
+                                    <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><Code className="h-4 w-4"/></Button></TooltipTrigger>
                                     <TooltipContent><p>View Code</p></TooltipContent>
                                 </Tooltip>
                             </DialogTrigger>
-                            <DialogContent className="max-w-3xl !p-0">
-                                <CodeEditor lang="tsx" writing={false} title={title}>{code}</CodeEditor>
+                            <DialogContent className="max-w-3xl !p-0 bg-transparent border-none">
+                                <CodeEditor lang="tsx" writing={false} title={title}>{code.trim()}</CodeEditor>
                             </DialogContent>
                         </Dialog>
                          <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button variant="ghost" size="icon" onClick={() => setIsFullscreen(true)}><Expand className="h-4 w-4"/></Button>
+                                <Button variant="ghost" size="icon" onClick={() => setIsFullscreen(true)} className="h-8 w-8"><Expand className="h-4 w-4"/></Button>
                             </TooltipTrigger>
                             <TooltipContent><p>Fullscreen</p></TooltipContent>
                         </Tooltip>
                         {onReplay && (
                              <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon" onClick={onReplay}><Play className="h-4 w-4"/></Button>
+                                    <Button variant="ghost" size="icon" onClick={onReplay} className="h-8 w-8"><Play className="h-4 w-4"/></Button>
                                 </TooltipTrigger>
                                 <TooltipContent><p>Replay</p></TooltipContent>
                             </Tooltip>
                         )}
+                         {(onPlay || onStop) && (
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button variant="ghost" size="icon" onClick={isPlaying ? onStop : onPlay} className="h-8 w-8">
+                                        {isPlaying ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent><p>{isPlaying ? "Stop" : "Play"} Animation</p></TooltipContent>
+                            </Tooltip>
+                         )}
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className="flex-1">
-                <div className="relative flex justify-center p-8 h-64 overflow-hidden rounded-lg bg-background">
+            <CardContent className="flex-1 flex items-center justify-center">
+                <div className="relative flex justify-center p-8 h-full min-h-64 w-full overflow-hidden rounded-lg bg-background">
                     {children}
                 </div>
             </CardContent>
@@ -120,10 +115,8 @@ export function BackgroundCard({
     );
 
     return (
-      <>
-        <InteractiveMagicCard isInteractive={isInteractive}>
-            {cardContent}
-        </InteractiveMagicCard>
+      <TooltipProvider>
+        {cardContent}
         {isFullscreen && (
             <div className="fixed inset-0 z-[100] bg-background">
                 <div className="relative size-full">
@@ -134,7 +127,6 @@ export function BackgroundCard({
                 </div>
             </div>
         )}
-      </>
+      </TooltipProvider>
     );
 }
-

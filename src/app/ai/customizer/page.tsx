@@ -1,4 +1,4 @@
-import ComponentCustomizer from "@/app/components/[slug]/component-customizer";
+import ComponentCustomizer from "@/components/component-customizer";
 import {
     Card,
     CardContent,

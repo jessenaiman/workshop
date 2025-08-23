@@ -1,12 +1,12 @@
 
 import type { Metadata } from 'next';
 import '../app/globals.css';
-import { Header } from '@/app/components/header';
+import { Header } from '@/components/header';
 import { Toaster } from "@/components/ui/toaster"
 import Script from 'next/script';
 import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/app/components/app-sidebar';
-import { Footer } from '@/app/components/footer';
+import { AppSidebar } from '@/components/app-sidebar';
+import { Footer } from '@/components/footer';
 import { ThemeProviderWrapper } from "@/lib/theme-provider"
 import { BackgroundProvider, BackgroundRenderer } from '@/context/BackgroundContext';
 

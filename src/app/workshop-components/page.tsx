@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation';
 import { components } from '@/lib/components-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CodeBlock } from '@/app/components/code-block';
-import ComponentCustomizer from './component-customizer';
+import { CodeBlock } from '@/components/code-block';
+import ComponentCustomizer from '../../components/component-customizer';
 import { Code, Palette } from 'lucide-react';
 
 export default function ComponentPage({ params }: { params: { slug: string } }) {

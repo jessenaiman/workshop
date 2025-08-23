@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { handleCustomizeComponent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { CodeBlock } from '@/app/components/code-block';
+import { CodeBlock } from '@/components/code-block';
 import { Wand2, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 

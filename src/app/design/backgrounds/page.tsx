@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import TabSwitcher from "@/components/TabSwitcher";
@@ -20,6 +19,7 @@ import { HexagonBackground } from "@/components/animate-ui/backgrounds/hexagon";
 import { HoleBackground } from "@/components/animate-ui/backgrounds/hole";
 import { StarsBackground } from "@/components/animate-ui/backgrounds/stars";
 import { DesignComponentCard } from "@/components/design/design-component-card";
+import { Button } from "@/components/ui/button";
 
 export default function BackgroundsPage() {
   const [animatedGridProps, setAnimatedGridProps] = useState({ maxOpacity: 0.5, duration: 30 });
@@ -121,8 +121,6 @@ export default function BackgroundsPage() {
                 title={bg.name}
                 description={bg.description}
                 code={bg.code}
-                controls={null}
-                onApply={null}
               >
                 <div className={cn("w-full h-full rounded bg-gradient-to-r", bg.className)} />
               </DesignComponentCard>
@@ -160,7 +158,6 @@ export default function BackgroundsPage() {
                 description={bg.description}
                 code={bg.code}
                 onApply={bg.onApply}
-                controls={null}
               >
                 {bg.component}
               </DesignComponentCard>

@@ -40,6 +40,10 @@ export function TailwindSample({
     }
   }, [triggerKey]);
 
+  useEffect(() => {
+    // Auto-play once on mount
+    handlePlay();
+  }, []);
 
   const handleAnimationEnd = () => {
     // For infinite animations like spin/pulse, we don't want to remove the class
@@ -68,7 +72,8 @@ export function TailwindSample({
       onStop={handleStop}
       isPlaying={isAnimating}
     >
-      <div className="w-full h-24 flex items-center justify-center">
+      <div className="w-full h-full flex flex-col items-center justify-center">
+         <p className="text-sm text-muted-foreground mb-2">{description}</p>
         <div
             key={key}
             className={cn(

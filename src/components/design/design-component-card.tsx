@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Dialog, DialogContent, DialogTrigger } from "@/components/animate-ui/radix/dialog";
 import { CodeEditor } from "@/components/animate-ui/components/code-editor";
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Eye, Settings, Code, Expand, Play, Square } from "lucide-react";
+import { Eye, Settings, Code, Expand, Play, Square, RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DesignComponentCardProps {
@@ -18,9 +18,9 @@ interface DesignComponentCardProps {
     code: string;
     controls?: ReactNode | null;
     onApply?: (() => void) | null;
-    onReplay?: () => void;
-    onPlay?: () => void;
-    onStop?: () => void;
+    onReplay?: (() => void) | null;
+    onPlay?: (() => void) | null;
+    onStop?: (() => void) | null;
     isPlaying?: boolean;
     className?: string;
 }
@@ -88,7 +88,7 @@ export function DesignComponentCard({
                         {onReplay && (
                              <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon" onClick={onReplay} className="h-8 w-8"><Play className="h-4 w-4"/></Button>
+                                    <Button variant="ghost" size="icon" onClick={onReplay} className="h-8 w-8"><RefreshCcw className="h-4 w-4"/></Button>
                                 </TooltipTrigger>
                                 <TooltipContent><p>Replay</p></TooltipContent>
                             </Tooltip>

@@ -40,6 +40,11 @@ export function AnimateCssSample({
     }
   }, [triggerKey]);
 
+  useEffect(() => {
+    // Auto-play once on mount
+    handlePlay();
+  }, []);
+
   const handleAnimationEnd = () => {
     setIsAnimating(false);
   };
@@ -66,7 +71,8 @@ export function AnimateCssSample({
       onStop={handleStop}
       isPlaying={isAnimating}
     >
-      <div className="w-full h-24 flex items-center justify-center">
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <p className="text-sm text-muted-foreground mb-2">{animation}</p>
         <div
             key={key}
             className={cn(

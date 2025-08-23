@@ -72,10 +72,9 @@ export default function AnimateCssPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-start mb-4 gap-8">
-        <NeonGradientCard>
-          <div className="p-4">
-            <Card className="bg-transparent border-none w-full max-w-sm">
+      <NeonGradientCard className="mb-4">
+          <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <Card className="bg-transparent border-none">
                 <CardHeader>
                 <CardTitle>Animation Settings</CardTitle>
                 </CardHeader>
@@ -85,13 +84,14 @@ export default function AnimateCssPage() {
                 </div>
                 </CardContent>
             </Card>
+            <div className="flex justify-center">
+                <Button variant="outline" onClick={handleTriggerAll}>
+                    <PlayCircle className="w-4 h-4 mr-2" />
+                    Trigger All Animations
+                </Button>
+            </div>
           </div>
         </NeonGradientCard>
-        <Button variant="outline" onClick={handleTriggerAll}>
-          <PlayCircle className="w-4 h-4 mr-2" />
-          Trigger All Animations
-        </Button>
-      </div>
 
       {Object.entries(ANIMATIONS).map(([category, animations]) => (
         <div key={category} className="mb-12">

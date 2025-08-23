@@ -42,7 +42,8 @@ export function AnimateCssSample({
 
   useEffect(() => {
     // Auto-play once on mount
-    handlePlay();
+    const timer = setTimeout(handlePlay, Math.random() * 500);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAnimationEnd = () => {
@@ -65,14 +66,13 @@ export function AnimateCssSample({
   return (
     <DesignComponentCard
       title={animation}
-      description={`Animate.css - ${animation}`}
+      description={`Animate.css`}
       code={code}
       onPlay={handlePlay}
       onStop={handleStop}
       isPlaying={isAnimating}
     >
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <p className="text-sm text-muted-foreground mb-2">{animation}</p>
+        <p className="text-sm text-muted-foreground absolute top-4">{animation}</p>
         <div
             key={key}
             className={cn(
@@ -82,7 +82,6 @@ export function AnimateCssSample({
             )}
             onAnimationEnd={handleAnimationEnd}
         />
-      </div>
     </DesignComponentCard>
   );
 }

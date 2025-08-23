@@ -26,8 +26,8 @@ export function TailwindSample({
   const [key, setKey] = useState(0);
 
   const handlePlay = () => {
-    setIsAnimating(true);
     setKey(prev => prev + 1);
+    setIsAnimating(true);
   };
 
   const handleStop = () => {
@@ -42,7 +42,8 @@ export function TailwindSample({
 
   useEffect(() => {
     // Auto-play once on mount
-    handlePlay();
+    const timer = setTimeout(handlePlay, Math.random() * 500);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAnimationEnd = () => {
@@ -72,8 +73,7 @@ export function TailwindSample({
       onStop={handleStop}
       isPlaying={isAnimating}
     >
-      <div className="w-full h-full flex flex-col items-center justify-center">
-         <p className="text-sm text-muted-foreground mb-2">{description}</p>
+        <p className="text-sm text-muted-foreground absolute top-4">{description}</p>
         <div
             key={key}
             className={cn(
@@ -82,7 +82,6 @@ export function TailwindSample({
             )}
             onAnimationEnd={handleAnimationEnd}
         />
-      </div>
     </DesignComponentCard>
   );
 }

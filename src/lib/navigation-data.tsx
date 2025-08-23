@@ -17,7 +17,8 @@ import {
     Server,
     MessageSquare,
     FileCode,
-    Layers
+    Layers,
+    Workflow
   } from "lucide-react";
   
   export const navigationItems = [
@@ -47,6 +48,7 @@ import {
         { title: "Devices", path: "/design/devices", icon: <Smartphone /> },
         { title: "Interactive", path: "/design/interactive", icon: <MousePointer /> },
         { title: "Text", path: "/design/text", icon: <Type /> },
+        { title: "Transitions", path: "/design/transitions", icon: <Workflow /> },
         { title: "Utilities", path: "/design/utilities", icon: <Code /> },
       ]
     },

@@ -9,6 +9,7 @@ import {
   MousePointer,
   Type,
   Code,
+  Workflow,
 } from "lucide-react";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import Link from "next/link";
@@ -69,13 +70,22 @@ const features = [
     className: "lg:row-start-2 lg:row-end-3 lg:col-start-3 lg:col-end-4",
   },
   {
+    Icon: Workflow,
+    name: "Transitions",
+    description: "Examples of page and element transitions.",
+    href: "/design/transitions",
+    cta: "View Transitions",
+    background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
+    className: "lg:row-start-3 lg:row-end-4 lg:col-start-1 lg:col-end-2",
+  },
+  {
     Icon: Code,
     name: "Utilities",
     description: "Helpful components for common UI patterns and interactions.",
     href: "/design/utilities",
     cta: "View Utilities",
     background: <div className="absolute -right-20 -top-20 opacity-20 transition-all duration-300 group-hover:scale-110" />,
-    className: "lg:row-start-3 lg:row-end-4 lg:col-start-1 lg:col-end-4",
+    className: "lg:row-start-3 lg:row-end-4 lg:col-start-2 lg:col-end-4",
   },
 ];
 

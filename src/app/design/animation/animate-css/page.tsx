@@ -4,12 +4,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
-import { ANIMATIONS } from "@/data/animation";
-import { AnimateCssSample } from "@/components/animation/AnimateCssSample";
+import { ANIMATIONS, COLOR_THEMES } from "@/data/animation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
+import { DesignComponentCard } from "@/components/design/design-component-card";
+import { cn } from "@/lib/utils";
 
 export default function AnimateCssPage() {
   const [triggerKey, setTriggerKey] = useState(0);
@@ -96,16 +97,47 @@ export default function AnimateCssPage() {
         <div key={category} className="mb-12">
           <h2 className="text-3xl font-semibold mb-6 text-center">{category}</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {animations.map((animation) => (
-              <AnimateCssSample
-                key={animation}
-                animation={animation}
-                duration={settings.duration}
-                delay={settings.delay}
-                iteration={settings.iteration}
-                triggerKey={triggerKey}
-              />
-            ))}
+            {animations.map((animation) => {
+                const randomTheme = COLOR_THEMES[Math.floor(Math.random() * COLOR_THEMES.length)];
+                const code = `<div className="animate__animated animate__${animation} ${settings.duration} ${settings.delay} ${settings.iteration}"></div>`;
+                
+                const [key, setKey] = useState(0);
+                const [isAnimating, setIsAnimating] = useState(false);
+                
+                const handlePlay = () => {
+                    setIsAnimating(true);
+                    setKey(prev => prev + 1);
+                };
+
+                React.useEffect(() => {
+                    if (triggerKey > 0) handlePlay();
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                }, [triggerKey]);
+
+                return (
+                    <DesignComponentCard
+                        key={animation}
+                        title={animation}
+                        description="Animate.css"
+                        code={code}
+                        onPlay={handlePlay}
+                        isPlaying={isAnimating}
+                        onStop={() => setIsAnimating(false)}
+                    >
+                        <div
+                            key={key}
+                            className={cn(
+                                "w-16 h-16 rounded-lg bg-gradient-to-r flex items-center justify-center text-center p-1",
+                                randomTheme,
+                                isAnimating && `animate__animated animate__${animation} ${settings.duration} ${settings.delay} ${settings.iteration}`
+                            )}
+                            onAnimationEnd={() => setIsAnimating(false)}
+                        >
+                            <p className="text-xs text-white/50">{animation}</p>
+                        </div>
+                    </DesignComponentCard>
+                );
+            })}
           </div>
         </div>
       ))}

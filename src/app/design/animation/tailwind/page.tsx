@@ -4,11 +4,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
-import { TailwindSample } from "@/components/animation/TailwindSample";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
+import { DesignComponentCard } from "@/components/design/design-component-card";
+import { cn } from "@/lib/utils";
 
 export default function TailwindPage() {
   const [triggerKey, setTriggerKey] = useState(0);
@@ -94,17 +95,46 @@ export default function TailwindPage() {
         </NeonGradientCard>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        {animations.map((anim) => (
-          <TailwindSample
-            key={anim.name}
-            animation={anim.name}
-            description={anim.description}
-            duration={settings.duration}
-            delay={settings.delay}
-            timing={settings.timing}
-            triggerKey={triggerKey}
-          />
-        ))}
+        {animations.map((anim) => {
+            const code = `<div className="${anim.name} ${settings.duration} ${settings.delay} ${settings.timing}"></div>`;
+            const [key, setKey] = useState(0);
+            const [isAnimating, setIsAnimating] = useState(false);
+
+            const handlePlay = () => {
+                setKey(prev => prev + 1);
+                setIsAnimating(true);
+            };
+
+            React.useEffect(() => {
+                if(triggerKey > 0) handlePlay();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [triggerKey]);
+            
+            return (
+                <DesignComponentCard
+                    key={anim.name}
+                    title={anim.name.replace('animate-', '')}
+                    description={anim.description}
+                    code={code}
+                    onPlay={handlePlay}
+                    isPlaying={isAnimating}
+                    onStop={() => setIsAnimating(false)}
+                >
+                    <div
+                        key={key}
+                        className={cn(
+                            "w-16 h-16 rounded-lg bg-gradient-to-r from-teal-400 to-blue-500",
+                            isAnimating && `${anim.name} ${settings.duration} ${settings.delay} ${settings.timing}`
+                        )}
+                        onAnimationEnd={() => {
+                            if (!anim.name.includes('spin') && !anim.name.includes('pulse') && !anim.name.includes('ping')) {
+                                setIsAnimating(false);
+                            }
+                        }}
+                    />
+                </DesignComponentCard>
+            )
+        })}
       </div>
     </div>
   );

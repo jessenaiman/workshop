@@ -195,7 +195,7 @@ export default function ThreeJSPage() {
             <Head>
                 <title>Three.js Demos</title>
             </Head>
-            <div className="container mx-auto px-4 py-12 space-y-8">
+            <div className="space-y-8">
                  <NeonGradientCard className="mb-4">
                     <div className="p-8">
                         <h3 className="text-2xl font-semibold mb-2 text-center">Three.js Interactive Demos</h3>

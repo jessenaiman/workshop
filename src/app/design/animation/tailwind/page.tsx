@@ -33,7 +33,7 @@ export default function TailwindPage() {
     <div className="space-y-8">
        <NeonGradientCard className="mb-4">
           <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <Card className="bg-transparent border-none">
+            <Card className="bg-transparent border-none shadow-none">
                 <CardHeader>
                 <CardTitle>Animation Settings</CardTitle>
                 </CardHeader>
@@ -42,7 +42,7 @@ export default function TailwindPage() {
                     <div>
                         <Label htmlFor="duration">Duration</Label>
                         <Select value={settings.duration} onValueChange={(value) => setSettings({ ...settings, duration: value })}>
-                            <SelectTrigger id="duration">
+                            <SelectTrigger id="duration" className="w-full">
                             <SelectValue placeholder="Select duration" />
                             </SelectTrigger>
                             <SelectContent>
@@ -56,7 +56,7 @@ export default function TailwindPage() {
                     <div>
                         <Label htmlFor="delay">Delay</Label>
                         <Select value={settings.delay} onValueChange={(value) => setSettings({ ...settings, delay: value })}>
-                            <SelectTrigger id="delay">
+                            <SelectTrigger id="delay" className="w-full">
                             <SelectValue placeholder="Select delay" />
                             </SelectTrigger>
                             <SelectContent>
@@ -70,7 +70,7 @@ export default function TailwindPage() {
                     <div>
                         <Label htmlFor="timing">Timing Function</Label>
                         <Select value={settings.timing} onValueChange={(value) => setSettings({ ...settings, timing: value })}>
-                            <SelectTrigger id="timing">
+                            <SelectTrigger id="timing" className="w-full">
                             <SelectValue placeholder="Select timing" />
                             </SelectTrigger>
                             <SelectContent>
@@ -84,7 +84,7 @@ export default function TailwindPage() {
                 </div>
                 </CardContent>
             </Card>
-            <div className="flex justify-center">
+            <div className="flex items-center justify-center md:justify-end">
                 <Button variant="outline" onClick={handleTriggerAll}>
                     <PlayCircle className="w-4 h-4 mr-2" />
                     Trigger All Animations
@@ -93,7 +93,7 @@ export default function TailwindPage() {
           </div>
         </NeonGradientCard>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {animations.map((anim) => (
           <TailwindSample
             key={anim.name}

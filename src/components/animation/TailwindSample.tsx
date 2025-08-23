@@ -100,7 +100,7 @@ export function TailwindSample({
 
   return (
     <>
-    <MagicCard className="group flex flex-col aspect-square justify-between overflow-hidden cursor-pointer">
+    <MagicCard className="flex flex-col aspect-square justify-between overflow-hidden cursor-pointer">
         <div className="p-4 flex justify-between items-start">
             <div>
                 <p className="font-bold text-sm">{animation.replace('animate-', '')}</p>
@@ -114,7 +114,7 @@ export function TailwindSample({
                     <PopoverContent className="w-auto p-1">{controls}</PopoverContent>
                 </Popover>
             ) : (
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center">
                     {controls}
                 </div>
             )}
@@ -124,8 +124,8 @@ export function TailwindSample({
         </div>
       </MagicCard>
       {isFullscreen && (
-        <div className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-sm flex items-center justify-center">
-            <div className="relative size-full max-w-lg max-h-lg flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-sm flex items-center justify-center" onClick={() => setIsFullscreen(false)}>
+            <div className="relative size-full max-w-lg max-h-lg flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
                 {content}
                 <Button variant="outline" size="icon" className="absolute top-4 right-4 z-10" onClick={() => setIsFullscreen(false)}>
                     <Expand className="h-4 w-4 rotate-45" />
